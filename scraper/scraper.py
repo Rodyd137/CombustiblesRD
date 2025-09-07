@@ -32,6 +32,27 @@ RANGE_RE = re.compile(
     re.IGNORECASE
 )
 
+def parse_price(s: str) -> float:
+    """
+    Convierte strings con distintos formatos a float:
+    - "290.10"  -> 290.10
+    - "290,10"  -> 290.10
+    - "1.234,56"-> 1234.56
+    - ignora RD$, DOP y espacios
+    """
+    s = (s or "").strip()
+    s = s.replace("RD$", "").replace("DOP", "").strip()
+    # quitar espacios dentro: "290 10" -> "29010"? Mejor quitamos todos los espacios
+    s = s.replace(" ", "")
+    if "," in s and "." in s:
+        # formato europeo: miles con punto y decimales con coma
+        s = s.replace(".", "").replace(",", ".")
+    elif "," in s:
+        # decimales con coma
+        s = s.replace(",", ".")
+    # si solo tiene punto, ya está bien
+    return float(s)
+
 def norm_key(label: str) -> str:
     k = label.lower().strip()
     k = re.sub(r"\s+", " ", k)
@@ -80,8 +101,10 @@ def fetch():
         if not m:
             continue
         label, price_str, unit, note = m.groups()
-        price = float(price_str.replace(".", "").replace(",", ".")) if price_str else None
+
+        price = parse_price(price_str) if price_str else None
         unit_norm = {"galón": "galon", "galon": "galon", "m³": "m3", "m3": "m3"}.get(unit.lower(), unit.lower())
+
         change_type, change_amount = None, None
         if note:
             low = note.lower()
@@ -89,12 +112,15 @@ def fetch():
                 change_type = "same"
             elif "sube" in low:
                 change_type = "up"
-                m2 = re.search(r"([\d\.,]+)", low)
-                if m2: change_amount = float(m2.group(1).replace(".", "").replace(",", "."))
+                m2 = re.search(r"([\d\.,]+)", note)
+                if m2:
+                    change_amount = parse_price(m2.group(1))
             elif "baja" in low:
                 change_type = "down"
-                m2 = re.search(r"([\d\.,]+)", low)
-                if m2: change_amount = float(m2.group(1).replace(".", "").replace(",", "."))
+                m2 = re.search(r"([\d\.,]+)", note)
+                if m2:
+                    change_amount = parse_price(m2.group(1))
+
         items.append({
             "label": label.strip(),
             "key": norm_key(label),
