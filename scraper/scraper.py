@@ -1,5 +1,6 @@
 import os, re, json, datetime, requests
 from bs4 import BeautifulSoup
+from dateutil import parser as dtp
 
 SOURCE_URL = os.getenv("SOURCE_URL", "https://www.conectate.com.do/articulo/precio-combustible-republica-dominicana/")
 ROOT = os.path.dirname(__file__)
@@ -27,18 +28,15 @@ FUEL_KEYS = {
     "gas natural": "gas_natural"
 }
 
-MONTHS_ES = {
-    "enero":1,"febrero":2,"marzo":3,"abril":4,"mayo":5,"junio":6,
-    "julio":7,"agosto":8,"septiembre":9,"setiembre":9,"octubre":10,"noviembre":11,"diciembre":12
-}
-
-RE_WEEK = re.compile(
-    r"semana\s+del\s+(\d{1,2})\s+de\s+([a-záéíóú]+)\s+(?:al\s+(\d{1,2})\s+de\s+([a-záéíóú]+)\s+)?de\s+(\d{4})",
+PRICE_RE = re.compile(
+    r"^\s*([^:]+):\s*RD\$\s*([\d\.,]+)\s+(?:por\s+(gal[oó]n|m³|m3))?\s*;?\s*(mantiene su precio|sube\s+RD\$\s*[\d\.,]+|baja\s+RD\$\s*[\d\.,]+)?",
     re.IGNORECASE
 )
 
-RE_PRICE_IN_CELL = re.compile(r"RD\$\s*[\d\.,]+", re.IGNORECASE)
-RE_NUMBER = re.compile(r"[\d\.,]+")
+RANGE_RE = re.compile(
+    r"semana\s+del\s+([^,]+?)(?:,|\s+)(?:al\s+([^,]+?))?\s+de\s+(\d{4})",
+    re.IGNORECASE
+)
 
 def parse_price(s: str) -> float:
     s = (s or "").strip()
@@ -60,114 +58,118 @@ def norm_key(label: str) -> str:
     k = re.sub(r"[^a-z0-9]+", "_", k)
     return k.strip("_")
 
-def parse_spanish_date(day: str, month_name: str, year: str):
-    d = int(day)
-    m = MONTHS_ES.get(month_name.lower())
-    y = int(year)
+def parse_date_range(text: str):
+    m = RANGE_RE.search(text.replace("\n", " "))
     if not m:
-        return None
-    return datetime.date(y, m, d)
+        return None, None
+    start_str, end_str, year_str = m.groups()
+    yr = int(year_str)
+    try:
+        start = dtp.parse(f"{start_str.strip()} {yr}", dayfirst=True, fuzzy=True)
+    except Exception:
+        start = None
+    try:
+        if end_str:
+            if start:
+                end = dtp.parse(f"{end_str.strip()} {yr}", dayfirst=True, fuzzy=True, default=start)
+            else:
+                end = dtp.parse(f"{end_str.strip()} {yr}", dayfirst=True, fuzzy=True)
+        else:
+            end = start
+    except Exception:
+        end = None
+    return start, end
 
-def extract_latest_week_anchor(soup: BeautifulSoup):
-    """Devuelve (p_element, start_date, end_date) del ÚLTIMO párrafo 'semana del ...'."""
+def find_latest_week_paragraph(soup: BeautifulSoup):
+    """Devuelve (p_element, start_date, end_date) del ÚLTIMO párrafo que menciona 'semana del'."""
     latest = None
     for p in soup.select("p"):
         txt = p.get_text(" ", strip=True)
-        m = RE_WEEK.search(txt)
-        if m:
-            d1, mon1, d2, mon2, yr = m.groups()
-            start = parse_spanish_date(d1, mon1, yr)
-            end = parse_spanish_date(d2, mon2 if mon2 else mon1, yr) if d2 else start
-            latest = (p, start, end)
-    if latest:
-        return latest
-    return (None, None, None)
+        if RANGE_RE.search(txt):
+            start, end = parse_date_range(txt)
+            if start or end:
+                latest = (p, start, end)
+    return latest if latest else (None, None, None)
 
-def parse_table_generic(tbl: BeautifulSoup):
+# ---------- PARSEAR TABLA DESPUÉS DEL PÁRRAFO DE LA SEMANA ACTUAL ---------- #
+def parse_table_after(anchor_p: BeautifulSoup):
     """
-    Lee una tabla sin depender de <thead>.
-    Heurística:
-      - Encuentra la columna de PRECIO como la que contenga "RD$" o un número con ,/. en la mayoría de filas.
-      - La columna de NOMBRE será la primera celda no numérica/monetaria.
+    Toma la PRIMERA <table> DESPUÉS del párrafo que contiene la semana actual.
+    Interpreta columnas tipo: 'Combustible' / 'Precio' / 'Variación' (si existe).
     """
-    # Construir filas (excluir filas de encabezado si tienen <th>)
-    rows = []
-    for tr in tbl.find_all("tr"):
-        # si toda la fila es th, sáltala
-        if tr.find_all("th") and not tr.find_all("td"):
-            continue
-        cells = [c.get_text(" ", strip=True) for c in tr.find_all(["td","th"])]
-        if cells and len(cells) >= 2:
-            rows.append(cells)
+    if anchor_p is None:
+        return None
 
-    if not rows:
-        return []
+    tbl = anchor_p.find_next("table")
+    if not tbl:
+        # Algunos sitios envuelven la tabla en <figure class="wp-block-table"> -> table adentro
+        wrapper = anchor_p.find_next(lambda tag: tag.name in ("figure","div") and "table" in tag.get("class", []) or "wp-block-table" in tag.get("class", []))
+        if wrapper:
+            tbl = wrapper.find("table")
+    if not tbl:
+        return None
 
-    # Inferir índice de precio
-    n_cols = max(len(r) for r in rows)
-    score_price = [0]*n_cols
-    for r in rows:
-        for i, c in enumerate(r):
-            if i >= n_cols: continue
-            if RE_PRICE_IN_CELL.search(c):
-                score_price[i] += 2
-            # Si parece número con separadores, suma 1 (pero evita nombres)
-            elif RE_NUMBER.fullmatch(c.replace(" ", "")):
-                score_price[i] += 1
-    # columna candidata de precio:
-    col_price = max(range(n_cols), key=lambda i: score_price[i])
+    # headers
+    headers = [th.get_text(" ", strip=True).lower() for th in tbl.select("thead th")]
+    if not headers:
+        first_ths = [th.get_text(" ", strip=True).lower() for th in tbl.select("tr th")]
+        headers = first_ths
+
+    if not headers or len(headers) < 2:
+        return None
+    if not any("combust" in h for h in headers) or not any("precio" in h for h in headers):
+        return None
+
+    # localizar columnas
+    try:
+        col_name = next(i for i, h in enumerate(headers) if "combust" in h)
+    except StopIteration:
+        return None
+    try:
+        col_price = next(i for i, h in enumerate(headers) if "precio" in h)
+    except StopIteration:
+        return None
+
+    col_var = None
+    for i, h in enumerate(headers):
+        if any(k in h for k in ["variación", "variacion", "cambio", "diferencia"]):
+            col_var = i; break
 
     items = []
-    for r in rows:
-        # asegurar longitud
-        if len(r) <= col_price: 
+    for tr in tbl.select("tbody tr"):
+        tds = [td.get_text(" ", strip=True) for td in tr.select("td")]
+        if not tds or len(tds) <= max(col_price, col_name):
             continue
-        price_text = r[col_price]
-        # label = primera celda que no sea la de precio y que tenga algo parecido a nombre
-        label = None
-        for i, c in enumerate(r):
-            if i == col_price: 
-                continue
-            # descartar celdas muy numéricas
-            if RE_PRICE_IN_CELL.search(c):
-                continue
-            if RE_NUMBER.fullmatch(c.replace(" ", "")):  # ej "227.70"
-                continue
-            if c.strip():
-                label = c.strip()
-                break
 
-        if not label:
-            continue
+        label = tds[col_name]
+        price_text = tds[col_price]
+        note = tds[col_var] if (col_var is not None and col_var < len(tds)) else None
 
         try:
             price = parse_price(price_text)
         except Exception:
             continue
 
-        # variación (si hay otra celda con "sube/baja/mantiene")
         change_type, change_amount = None, None
-        for c in r:
-            low = c.lower()
+        if note:
+            low = note.lower()
             if "mantien" in low:
-                change_type = "same"; break
-            if "sube" in low:
+                change_type = "same"
+            elif "sube" in low:
                 change_type = "up"
-                m2 = RE_NUMBER.search(c)
+                m2 = re.search(r"([\d\.,]+)", note)
                 if m2:
-                    try: change_amount = parse_price(m2.group(0))
-                    except: pass
-                break
-            if "baja" in low:
+                    try: change_amount = parse_price(m2.group(1))
+                    except Exception: pass
+            elif "baja" in low:
                 change_type = "down"
-                m2 = RE_NUMBER.search(c)
+                m2 = re.search(r"([\d\.,]+)", note)
                 if m2:
-                    try: change_amount = parse_price(m2.group(0))
-                    except: pass
-                break
+                    try: change_amount = parse_price(m2.group(1))
+                    except Exception: pass
 
         items.append({
-            "label": label,
+            "label": label.strip(),
             "key": norm_key(label),
             "price_dop": price,
             "unit": "galon",
@@ -177,70 +179,66 @@ def parse_table_generic(tbl: BeautifulSoup):
             } if change_type else None
         })
 
-    return items
+    return items or None
 
-def parse_table_after_anchor(anchor_p: BeautifulSoup):
-    """
-    Busca la PRIMERA tabla después del párrafo ancla;
-    si no sirve (0 items), intenta con la SIGUIENTE tabla inmediata.
-    """
+# ------------------------ FALLBACK: PÁRRAFOS ANCLADOS ---------------------- #
+def parse_paragraphs_after(anchor_p: BeautifulSoup):
     if anchor_p is None:
         return []
-    # primera candidata
-    t1 = anchor_p.find_next("table")
-    candidates = []
-    if t1: candidates.append(t1)
-    # algunos sitios usan figure.wp-block-table
-    w1 = anchor_p.find_next(lambda tag: tag.name in ("figure","div") and "wp-block-table" in (tag.get("class") or []))
-    if w1:
-        t_in = w1.find("table")
-        if t_in and t_in not in candidates:
-            candidates.append(t_in)
-    # siguiente tabla por si acaso
-    if t1:
-        t2 = t1.find_next("table")
-        if t2 and t2 not in candidates:
-            candidates.append(t2)
+    items = []
+    # Recorremos los hermanos siguientes hasta que aparezca otro encabezado de semana
+    node = anchor_p
+    while True:
+        node = node.find_next()  # siguiente nodo en DOM
+        if node is None:
+            break
+        if node.name == "p":
+            txt = node.get_text(" ", strip=True)
+            if RANGE_RE.search(txt) and node is not anchor_p:
+                break  # alcanzamos otra semana -> cortamos
+            m = PRICE_RE.match(txt)
+            if m:
+                label, price_str, unit, note = m.groups()
+                try:
+                    price = parse_price(price_str) if price_str else None
+                except Exception:
+                    continue
+                unit_norm = {"galón": "galon", "galon": "galon", "m³": "m3", "m3": "m3"}.get((unit or "").lower(), "galon")
 
-    for tbl in candidates:
-        items = parse_table_generic(tbl)
-        if items:
-            return items
-    return []
+                change_type, change_amount = None, None
+                if note:
+                    low = note.lower()
+                    if "mantiene" in low:
+                        change_type = "same"
+                    elif "sube" in low:
+                        change_type = "up"
+                        m2 = re.search(r"([\d\.,]+)", note)
+                        if m2:
+                            try: change_amount = parse_price(m2.group(1))
+                            except Exception: pass
+                    elif "baja" in low:
+                        change_type = "down"
+                        m2 = re.search(r"([\d\.,]+)", note)
+                        if m2:
+                            try: change_amount = parse_price(m2.group(1))
+                            except Exception: pass
 
+                items.append({
+                    "label": label.strip(),
+                    "key": norm_key(label),
+                    "price_dop": price,
+                    "unit": unit_norm,
+                    "change": {
+                        "type": change_type,
+                        "amount_dop": change_amount
+                    } if change_type else None
+                })
+        # Si encontramos otra tabla antes de precios en párrafos, igual rompemos (ya no es el bloque de texto)
+        if node.name == "table":
+            break
+    return items
+
+# --------------------------------- MAIN ----------------------------------- #
 def fetch():
     r = requests.get(SOURCE_URL, timeout=30, headers={
-        "User-Agent": "CombustiblesRDBot/1.0 (+contacto: tu-email@dominio.do)"
-    })
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "lxml")
-
-    # 1) Encontrar la semana vigente (ancla + fechas)
-    anchor_p, start, end = extract_latest_week_anchor(soup)
-
-    # 2) Solo TABLA (sin fallback a párrafos)
-    items = parse_table_after_anchor(anchor_p)
-
-    payload = {
-        "source": SOURCE_URL,
-        "updated_at_utc": datetime.datetime.utcnow().isoformat() + "Z",
-        "week": {
-            "start_date": start.isoformat() if start else None,
-            "end_date": end.isoformat() if end else None
-        },
-        "currency": "DOP",
-        "items": items
-    }
-
-    os.makedirs(OUT_DIR, exist_ok=True)
-    os.makedirs(HIST_DIR, exist_ok=True)
-
-    with open(os.path.join(OUT_DIR, "latest.json"), "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-
-    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d")
-    with open(os.path.join(HIST_DIR, f"{stamp}.json"), "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
-
-if __name__ == "__main__":
-    fetch()
+        "User
