@@ -41,6 +41,12 @@ jobs:
         run: |
           echo "---- latest.json (head) ----"
           head -n 80 data/latest.json || true
+          
+      # === Create a History of Pricings
+      - name: Show trend.json preview
+        run: |
+          echo "---- trend.json (head) ----"
+          head -n 80 data/trend.json || true
 
       - name: Commit & push data
         run: |
