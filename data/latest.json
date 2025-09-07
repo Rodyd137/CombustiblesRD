@@ -1,0 +1,111 @@
+{
+  "source": "https://www.conectate.com.do/articulo/precio-combustible-republica-dominicana/",
+  "updated_at_utc": "2025-09-07T21:01:57.242617Z",
+  "week": {
+    "start_date": null,
+    "end_date": "2025-05-07"
+  },
+  "currency": "DOP",
+  "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 29010.0,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": null
+      }
+    },
+    {
+      "label": "Gasolina Regular",
+      "key": "gasolina_regular",
+      "price_dop": 27250.0,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": null
+      }
+    },
+    {
+      "label": "Gasoil Regular",
+      "key": "gasoil_regular",
+      "price_dop": 22480.0,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": null
+      }
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 24210.0,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": null
+      }
+    },
+    {
+      "label": "Avtur",
+      "key": "avtur",
+      "price_dop": 19406.0,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 685.0
+      }
+    },
+    {
+      "label": "Kerosene",
+      "key": "kerosene",
+      "price_dop": 22540.0,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 750.0
+      }
+    },
+    {
+      "label": "Fueloil #6",
+      "key": "fueloil_6",
+      "price_dop": 15490.0,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 436.0
+      }
+    },
+    {
+      "label": "Fueloil 1%S",
+      "key": "fueloil_1s",
+      "price_dop": 17100.0,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 553.0
+      }
+    },
+    {
+      "label": "Gas Licuado de Petróleo (GLP)",
+      "key": "glp",
+      "price_dop": 13720.0,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": null
+      }
+    },
+    {
+      "label": "Gas Natural",
+      "key": "gas_natural",
+      "price_dop": 4397.0,
+      "unit": "m3",
+      "change": {
+        "type": "same",
+        "amount_dop": null
+      }
+    }
+  ]
+}
