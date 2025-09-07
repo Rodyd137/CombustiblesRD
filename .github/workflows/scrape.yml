@@ -28,8 +28,11 @@ jobs:
       - name: Run scraper
         run: python scraper/scraper.py
 
-      - name: Build trend
+      - name: Build trend (full)
         run: python scraper/build_trend.py
+
+      - name: Build trend (min)
+        run: python scraper/build_trend_min.py
 
       # === Depuración: lista archivos generados ===
       - name: List files
@@ -50,6 +53,11 @@ jobs:
         run: |
           echo "---- trend.json (head) ----"
           head -n 80 data/trend.json || true
+
+      - name: Show trend_min.json preview
+        run: |
+          echo "---- trend_min.json (head) ----"
+          head -n 80 data/trend_min.json || true
 
       - name: Commit & push data
         run: |
