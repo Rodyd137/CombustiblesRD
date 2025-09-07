@@ -1,65 +1,65 @@
 {
-  "updated_at_utc": "2025-09-07T21:40:26.366907Z",
+  "updated_at_utc": "2025-09-07T22:10:58.815298Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
       {
         "date": "2025-05-07",
-        "price_dop": 29010
+        "price_dop": 290
       }
     ],
     "gasolina_regular": [
       {
         "date": "2025-05-07",
-        "price_dop": 27250
+        "price_dop": 272
       }
     ],
     "gasoil_regular": [
       {
         "date": "2025-05-07",
-        "price_dop": 22480
+        "price_dop": 225
       }
     ],
     "gasoil_optimo": [
       {
         "date": "2025-05-07",
-        "price_dop": 24210
+        "price_dop": 242
       }
     ],
     "avtur": [
       {
         "date": "2025-05-07",
-        "price_dop": 19406
+        "price_dop": 194
       }
     ],
     "kerosene": [
       {
         "date": "2025-05-07",
-        "price_dop": 22540
+        "price_dop": 225
       }
     ],
     "fueloil_6": [
       {
         "date": "2025-05-07",
-        "price_dop": 15490
+        "price_dop": 155
       }
     ],
     "fueloil_1s": [
       {
         "date": "2025-05-07",
-        "price_dop": 17100
+        "price_dop": 171
       }
     ],
     "glp": [
       {
         "date": "2025-05-07",
-        "price_dop": 13720
+        "price_dop": 137
       }
     ],
     "gas_natural": [
       {
         "date": "2025-05-07",
-        "price_dop": 4397
+        "price_dop": 44
       }
     ]
   },

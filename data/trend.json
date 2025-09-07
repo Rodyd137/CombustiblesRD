@@ -1,11 +1,11 @@
 {
-  "updated_at_utc": "2025-09-07T21:40:26.334238Z",
+  "updated_at_utc": "2025-09-07T22:10:58.781556Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
       {
         "date": "2025-05-07",
-        "price_dop": 29010.0,
+        "price_dop": 290.1,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -13,7 +13,7 @@
     "gasolina_regular": [
       {
         "date": "2025-05-07",
-        "price_dop": 27250.0,
+        "price_dop": 272.5,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -21,7 +21,7 @@
     "gasoil_regular": [
       {
         "date": "2025-05-07",
-        "price_dop": 22480.0,
+        "price_dop": 224.8,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -29,7 +29,7 @@
     "gasoil_optimo": [
       {
         "date": "2025-05-07",
-        "price_dop": 24210.0,
+        "price_dop": 242.1,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -37,7 +37,7 @@
     "avtur": [
       {
         "date": "2025-05-07",
-        "price_dop": 19406.0,
+        "price_dop": 194.06,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -45,7 +45,7 @@
     "kerosene": [
       {
         "date": "2025-05-07",
-        "price_dop": 22540.0,
+        "price_dop": 225.4,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -53,7 +53,7 @@
     "fueloil_6": [
       {
         "date": "2025-05-07",
-        "price_dop": 15490.0,
+        "price_dop": 154.9,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -61,7 +61,7 @@
     "fueloil_1s": [
       {
         "date": "2025-05-07",
-        "price_dop": 17100.0,
+        "price_dop": 171.0,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -69,7 +69,7 @@
     "glp": [
       {
         "date": "2025-05-07",
-        "price_dop": 13720.0,
+        "price_dop": 137.2,
         "delta_abs": null,
         "delta_pct": null
       }
@@ -77,7 +77,7 @@
     "gas_natural": [
       {
         "date": "2025-05-07",
-        "price_dop": 4397.0,
+        "price_dop": 43.97,
         "delta_abs": null,
         "delta_pct": null
       }
