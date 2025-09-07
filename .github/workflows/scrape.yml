@@ -2,8 +2,8 @@ name: Scrape & Publish
 
 on:
   schedule:
-    - cron: "0 22 * * FRI"
-    - cron: "*/30 * * * *"
+    - cron: "0 22 * * FRI"   # Viernes 6:00 PM RD
+    - cron: "*/30 * * * *"   # Cada 30 min (redundancia)
   workflow_dispatch:
 
 permissions:
@@ -14,15 +14,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
+
+      # Ejecuta el scraper SIN secret (usa la URL por defecto del script)
       - name: Run scraper
         run: python scraper/scraper.py
+
+      # === Depuración: lista archivos generados ===
+      - name: List files
+        run: |
+          echo "PWD:" && pwd
+          echo "ROOT:" && ls -la
+          echo "DATA:" && ls -la data || true
+          echo "HISTORY:" && ls -la data/history || true
+
+      # === Depuración: muestra preview del JSON (si existe) ===
+      - name: Show latest.json preview
+        run: |
+          echo "---- latest.json (head) ----"
+          head -n 80 data/latest.json || true
+
       - name: Commit & push if changed
         run: |
           git config user.name "gh-actions"
