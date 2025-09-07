@@ -38,19 +38,23 @@ def parse_price(s: str) -> float:
     - "290.10"  -> 290.10
     - "290,10"  -> 290.10
     - "1.234,56"-> 1234.56
-    - ignora RD$, DOP y espacios
+    - "6.85."   -> 6.85
     """
     s = (s or "").strip()
     s = s.replace("RD$", "").replace("DOP", "").strip()
-    # quitar espacios dentro: "290 10" -> "29010"? Mejor quitamos todos los espacios
     s = s.replace(" ", "")
+
+    # quita símbolos sobrantes al final tipo "6.85."
+    s = s.rstrip(".,")
+    
     if "," in s and "." in s:
-        # formato europeo: miles con punto y decimales con coma
+        # Formato europeo: miles con punto y decimales con coma
         s = s.replace(".", "").replace(",", ".")
     elif "," in s:
-        # decimales con coma
+        # Decimales con coma
         s = s.replace(",", ".")
-    # si solo tiene punto, ya está bien
+    # Si solo tiene punto, ya está bien
+    
     return float(s)
 
 def norm_key(label: str) -> str:
