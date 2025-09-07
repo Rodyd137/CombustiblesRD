@@ -28,6 +28,9 @@ jobs:
       - name: Run scraper
         run: python scraper/scraper.py
 
+      - name: Build trend
+        run: python scraper/build_trend.py
+
       # === Depuración: lista archivos generados ===
       - name: List files
         run: |
