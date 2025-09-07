@@ -1,0 +1,98 @@
+{
+  "updated_at_utc": "2025-09-07T21:27:28.621528Z",
+  "currency": "DOP",
+  "series": {
+    "gasolina_premium": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 29010.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "gasolina_regular": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 27250.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "gasoil_regular": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 22480.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "gasoil_optimo": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 24210.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "avtur": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 19406.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "kerosene": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 22540.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "fueloil_6": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 15490.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "fueloil_1s": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 17100.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "glp": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 13720.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ],
+    "gas_natural": [
+      {
+        "date": "2025-05-07",
+        "price_dop": 4397.0,
+        "delta_abs": null,
+        "delta_pct": null
+      }
+    ]
+  },
+  "keys": [
+    "avtur",
+    "fueloil_1s",
+    "fueloil_6",
+    "gas_natural",
+    "gasoil_optimo",
+    "gasoil_regular",
+    "gasolina_premium",
+    "gasolina_regular",
+    "glp",
+    "kerosene"
+  ]
+}
