@@ -1,85 +1,65 @@
 {
-  "updated_at_utc": "2025-09-07T21:40:26.334238Z",
+  "updated_at_utc": "2025-09-07T21:40:26.366907Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
       {
         "date": "2025-05-07",
-        "price_dop": 29010.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 29010
       }
     ],
     "gasolina_regular": [
       {
         "date": "2025-05-07",
-        "price_dop": 27250.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 27250
       }
     ],
     "gasoil_regular": [
       {
         "date": "2025-05-07",
-        "price_dop": 22480.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 22480
       }
     ],
     "gasoil_optimo": [
       {
         "date": "2025-05-07",
-        "price_dop": 24210.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 24210
       }
     ],
     "avtur": [
       {
         "date": "2025-05-07",
-        "price_dop": 19406.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 19406
       }
     ],
     "kerosene": [
       {
         "date": "2025-05-07",
-        "price_dop": 22540.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 22540
       }
     ],
     "fueloil_6": [
       {
         "date": "2025-05-07",
-        "price_dop": 15490.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 15490
       }
     ],
     "fueloil_1s": [
       {
         "date": "2025-05-07",
-        "price_dop": 17100.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 17100
       }
     ],
     "glp": [
       {
         "date": "2025-05-07",
-        "price_dop": 13720.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 13720
       }
     ],
     "gas_natural": [
       {
         "date": "2025-05-07",
-        "price_dop": 4397.0,
-        "delta_abs": null,
-        "delta_pct": null
+        "price_dop": 4397
       }
     ]
   },
