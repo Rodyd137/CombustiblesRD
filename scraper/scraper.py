@@ -7,6 +7,7 @@ ROOT = os.path.dirname(__file__)
 OUT_DIR = os.path.abspath(os.path.join(ROOT, "..", "data"))
 HIST_DIR = os.path.join(OUT_DIR, "history")
 
+# Normalización de combustibles
 FUEL_KEYS = {
     "gasolina premium": "gasolina_premium",
     "gasolina regular": "gasolina_regular",
@@ -28,17 +29,27 @@ FUEL_KEYS = {
     "gas natural": "gas_natural"
 }
 
+# Párrafos tipo: "Gasolina Premium: RD$ 290.10 por galón; mantiene su precio"
 PRICE_RE = re.compile(
     r"^\s*([^:]+):\s*RD\$\s*([\d\.,]+)\s+(?:por\s+(gal[oó]n|m³|m3))?\s*;?\s*(mantiene su precio|sube\s+RD\$\s*[\d\.,]+|baja\s+RD\$\s*[\d\.,]+)?",
     re.IGNORECASE
 )
 
+# Encabezado de semana: "para la semana del 30 de agosto al 6 de septiembre de 2025"
 RANGE_RE = re.compile(
     r"semana\s+del\s+([^,]+?)(?:,|\s+)(?:al\s+([^,]+?))?\s+de\s+(\d{4})",
     re.IGNORECASE
 )
 
 def parse_price(s: str) -> float:
+    """
+    Convierte strings a float con tolerancia:
+    - "290.10"  -> 290.10
+    - "290,10"  -> 290.10
+    - "1.234,56"-> 1234.56
+    - "6.85."   -> 6.85
+    - "RD$ 227.70" -> 227.70
+    """
     s = (s or "").strip()
     s = s.replace("RD$", "").replace("DOP", "").strip()
     s = s.replace(" ", "")
@@ -80,80 +91,135 @@ def parse_date_range(text: str):
         end = None
     return start, end
 
-def find_latest_week_paragraph(soup: BeautifulSoup):
-    """Devuelve (p_element, start_date, end_date) del ÚLTIMO párrafo que menciona 'semana del'."""
-    latest = None
-    for p in soup.select("p"):
-        txt = p.get_text(" ", strip=True)
-        if RANGE_RE.search(txt):
-            start, end = parse_date_range(txt)
+def extract_latest_week(soup: BeautifulSoup):
+    """Busca la última mención de 'semana del…' para sacar fechas."""
+    ps = [p.get_text(" ", strip=True) for p in soup.select("p")]
+    found = []
+    for i, p in enumerate(ps):
+        if RANGE_RE.search(p):
+            start, end = parse_date_range(p)
             if start or end:
-                latest = (p, start, end)
-    return latest if latest else (None, None, None)
+                found.append((i, start, end))
+    if not found:
+        return None, None, None
+    return found[-1]  # (index, start, end)
 
-# ---------- PARSEAR TABLA DESPUÉS DEL PÁRRAFO DE LA SEMANA ACTUAL ---------- #
-def parse_table_after(anchor_p: BeautifulSoup):
+# ------------------ PARSEO DE TABLA (fuente primaria) ------------------ #
+def parse_table(soup: BeautifulSoup):
     """
-    Toma la PRIMERA <table> DESPUÉS del párrafo que contiene la semana actual.
-    Interpreta columnas tipo: 'Combustible' / 'Precio' / 'Variación' (si existe).
+    Detecta la tabla superior con columnas tipo:
+    Combustible | Precio | Variación
+    y devuelve items normalizados.
     """
-    if anchor_p is None:
-        return None
+    tables = soup.select("table")
+    for tbl in tables:
+        # Lee headers
+        headers = [th.get_text(" ", strip=True).lower() for th in tbl.select("thead th")]
+        if not headers:
+            # Algunos artículos no usan thead; probamos con la primera fila
+            first_row_th = [th.get_text(" ", strip=True).lower() for th in tbl.select("tr th")]
+            if first_row_th:
+                headers = first_row_th
 
-    tbl = anchor_p.find_next("table")
-    if not tbl:
-        # Algunos sitios envuelven la tabla en <figure class="wp-block-table"> -> table adentro
-        wrapper = anchor_p.find_next(lambda tag: tag.name in ("figure","div") and "table" in tag.get("class", []) or "wp-block-table" in tag.get("class", []))
-        if wrapper:
-            tbl = wrapper.find("table")
-    if not tbl:
-        return None
-
-    # headers
-    headers = [th.get_text(" ", strip=True).lower() for th in tbl.select("thead th")]
-    if not headers:
-        first_ths = [th.get_text(" ", strip=True).lower() for th in tbl.select("tr th")]
-        headers = first_ths
-
-    if not headers or len(headers) < 2:
-        return None
-    if not any("combust" in h for h in headers) or not any("precio" in h for h in headers):
-        return None
-
-    # localizar columnas
-    try:
-        col_name = next(i for i, h in enumerate(headers) if "combust" in h)
-    except StopIteration:
-        return None
-    try:
-        col_price = next(i for i, h in enumerate(headers) if "precio" in h)
-    except StopIteration:
-        return None
-
-    col_var = None
-    for i, h in enumerate(headers):
-        if any(k in h for k in ["variación", "variacion", "cambio", "diferencia"]):
-            col_var = i; break
-
-    items = []
-    for tr in tbl.select("tbody tr"):
-        tds = [td.get_text(" ", strip=True) for td in tr.select("td")]
-        if not tds or len(tds) <= max(col_price, col_name):
+        # Heurística: debe tener al menos 2 columnas; debe incluir algo como 'combustible' y 'precio'
+        if not headers or len(headers) < 2:
+            continue
+        if not any("combust" in h for h in headers) or not any("precio" in h for h in headers):
             continue
 
-        label = tds[col_name]
-        price_text = tds[col_price]
-        note = tds[col_var] if (col_var is not None and col_var < len(tds)) else None
-
+        # Column mapping
         try:
-            price = parse_price(price_text)
+            col_name = next(i for i, h in enumerate(headers) if "combust" in h)
+        except StopIteration:
+            continue
+        try:
+            col_price = next(i for i, h in enumerate(headers) if "precio" in h)
+        except StopIteration:
+            continue
+
+        # Variación (si existe)
+        col_var = None
+        for i, h in enumerate(headers):
+            if any(k in h for k in ["variación", "variacion", "cambio", "diferencia"]):
+                col_var = i
+                break
+
+        # Lee filas
+        items = []
+        for tr in tbl.select("tbody tr"):
+            tds = [td.get_text(" ", strip=True) for td in tr.select("td")]
+            if not tds or len(tds) <= max(col_price, col_name):
+                continue
+
+            label = tds[col_name]
+            price_text = tds[col_price]
+            note = tds[col_var] if (col_var is not None and col_var < len(tds)) else None
+
+            # Parseos
+            price = None
+            try:
+                price = parse_price(price_text)
+            except Exception:
+                # si viene vacío o extraño, lo saltamos
+                continue
+
+            change_type, change_amount = None, None
+            if note:
+                low = note.lower()
+                if "mantien" in low:
+                    change_type = "same"
+                elif "sube" in low:
+                    change_type = "up"
+                    m2 = re.search(r"([\d\.,]+)", note)
+                    if m2:
+                        try: change_amount = parse_price(m2.group(1))
+                        except Exception: pass
+                elif "baja" in low:
+                    change_type = "down"
+                    m2 = re.search(r"([\d\.,]+)", note)
+                    if m2:
+                        try: change_amount = parse_price(m2.group(1))
+                        except Exception: pass
+
+            items.append({
+                "label": label.strip(),
+                "key": norm_key(label),
+                "price_dop": price,
+                "unit": "galon",   # la tabla no suele indicar unidad; asumimos galón
+                "change": {
+                    "type": change_type,
+                    "amount_dop": change_amount
+                } if change_type else None
+            })
+
+        if items:
+            return items  # usamos la PRIMERA tabla válida
+    return None
+
+# -------------- RESPALDO: PÁRRAFOS (si no hay tabla válida) -------------- #
+def parse_paragraphs_fallback(soup: BeautifulSoup, start_index=None):
+    ps = [p.get_text(" ", strip=True) for p in soup.select("p")]
+    scan_start = start_index if start_index is not None else 0
+    items = []
+
+    for j in range(scan_start, len(ps)):
+        text = ps[j]
+        if j > scan_start and RANGE_RE.search(text):
+            break
+        m = PRICE_RE.match(text)
+        if not m:
+            continue
+        label, price_str, unit, note = m.groups()
+        try:
+            price = parse_price(price_str) if price_str else None
         except Exception:
             continue
+        unit_norm = {"galón": "galon", "galon": "galon", "m³": "m3", "m3": "m3"}.get((unit or "").lower(), "galon")
 
         change_type, change_amount = None, None
         if note:
             low = note.lower()
-            if "mantien" in low:
+            if "mantiene" in low:
                 change_type = "same"
             elif "sube" in low:
                 change_type = "up"
@@ -172,73 +238,52 @@ def parse_table_after(anchor_p: BeautifulSoup):
             "label": label.strip(),
             "key": norm_key(label),
             "price_dop": price,
-            "unit": "galon",
+            "unit": unit_norm,
             "change": {
                 "type": change_type,
                 "amount_dop": change_amount
             } if change_type else None
         })
-
-    return items or None
-
-# ------------------------ FALLBACK: PÁRRAFOS ANCLADOS ---------------------- #
-def parse_paragraphs_after(anchor_p: BeautifulSoup):
-    if anchor_p is None:
-        return []
-    items = []
-    # Recorremos los hermanos siguientes hasta que aparezca otro encabezado de semana
-    node = anchor_p
-    while True:
-        node = node.find_next()  # siguiente nodo en DOM
-        if node is None:
-            break
-        if node.name == "p":
-            txt = node.get_text(" ", strip=True)
-            if RANGE_RE.search(txt) and node is not anchor_p:
-                break  # alcanzamos otra semana -> cortamos
-            m = PRICE_RE.match(txt)
-            if m:
-                label, price_str, unit, note = m.groups()
-                try:
-                    price = parse_price(price_str) if price_str else None
-                except Exception:
-                    continue
-                unit_norm = {"galón": "galon", "galon": "galon", "m³": "m3", "m3": "m3"}.get((unit or "").lower(), "galon")
-
-                change_type, change_amount = None, None
-                if note:
-                    low = note.lower()
-                    if "mantiene" in low:
-                        change_type = "same"
-                    elif "sube" in low:
-                        change_type = "up"
-                        m2 = re.search(r"([\d\.,]+)", note)
-                        if m2:
-                            try: change_amount = parse_price(m2.group(1))
-                            except Exception: pass
-                    elif "baja" in low:
-                        change_type = "down"
-                        m2 = re.search(r"([\d\.,]+)", note)
-                        if m2:
-                            try: change_amount = parse_price(m2.group(1))
-                            except Exception: pass
-
-                items.append({
-                    "label": label.strip(),
-                    "key": norm_key(label),
-                    "price_dop": price,
-                    "unit": unit_norm,
-                    "change": {
-                        "type": change_type,
-                        "amount_dop": change_amount
-                    } if change_type else None
-                })
-        # Si encontramos otra tabla antes de precios en párrafos, igual rompemos (ya no es el bloque de texto)
-        if node.name == "table":
-            break
     return items
 
-# --------------------------------- MAIN ----------------------------------- #
+# ------------------------------- MAIN ----------------------------------- #
 def fetch():
     r = requests.get(SOURCE_URL, timeout=30, headers={
-        "User
+        "User-Agent": "CombustiblesRDBot/1.0 (+contacto: tu-email@dominio.do)"
+    })
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "lxml")
+
+    # Fechas de semana (si existen)
+    anchor_idx, start, end = extract_latest_week(soup)
+
+    # 1) Intento principal: TABLA
+    items = parse_table(soup)
+
+    # 2) Respaldo: párrafos desde el encabezado más reciente
+    if not items:
+        items = parse_paragraphs_fallback(soup, start_index=anchor_idx if anchor_idx is not None else 0)
+
+    payload = {
+        "source": SOURCE_URL,
+        "updated_at_utc": datetime.datetime.utcnow().isoformat() + "Z",
+        "week": {
+            "start_date": start.date().isoformat() if start else None,
+            "end_date": end.date().isoformat() if end else None
+        },
+        "currency": "DOP",
+        "items": items or []
+    }
+
+    os.makedirs(OUT_DIR, exist_ok=True)
+    os.makedirs(HIST_DIR, exist_ok=True)
+
+    with open(os.path.join(OUT_DIR, "latest.json"), "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    with open(os.path.join(HIST_DIR, f"{stamp}.json"), "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+if __name__ == "__main__":
+    fetch()
