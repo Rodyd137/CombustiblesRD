@@ -1,10 +1,14 @@
 {
-  "updated_at_utc": "2025-09-07T23:38:26.050161Z",
+  "updated_at_utc": "2025-09-08T01:48:08.906874Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
       {
         "date": "2025-05-07",
+        "price_dop": 290
+      },
+      {
+        "date": "2025-05-08",
         "price_dop": 290
       }
     ],
@@ -12,11 +16,19 @@
       {
         "date": "2025-05-07",
         "price_dop": 272
+      },
+      {
+        "date": "2025-05-08",
+        "price_dop": 272
       }
     ],
     "gasoil_regular": [
       {
         "date": "2025-05-07",
+        "price_dop": 225
+      },
+      {
+        "date": "2025-05-08",
         "price_dop": 225
       }
     ],
@@ -24,11 +36,19 @@
       {
         "date": "2025-05-07",
         "price_dop": 242
+      },
+      {
+        "date": "2025-05-08",
+        "price_dop": 242
       }
     ],
     "avtur": [
       {
         "date": "2025-05-07",
+        "price_dop": 194
+      },
+      {
+        "date": "2025-05-08",
         "price_dop": 194
       }
     ],
@@ -36,11 +56,19 @@
       {
         "date": "2025-05-07",
         "price_dop": 225
+      },
+      {
+        "date": "2025-05-08",
+        "price_dop": 225
       }
     ],
     "fueloil_6": [
       {
         "date": "2025-05-07",
+        "price_dop": 155
+      },
+      {
+        "date": "2025-05-08",
         "price_dop": 155
       }
     ],
@@ -48,17 +76,29 @@
       {
         "date": "2025-05-07",
         "price_dop": 171
+      },
+      {
+        "date": "2025-05-08",
+        "price_dop": 171
       }
     ],
     "glp": [
       {
         "date": "2025-05-07",
         "price_dop": 137
+      },
+      {
+        "date": "2025-05-08",
+        "price_dop": 137
       }
     ],
     "gas_natural": [
       {
         "date": "2025-05-07",
+        "price_dop": 44
+      },
+      {
+        "date": "2025-05-08",
         "price_dop": 44
       }
     ]
