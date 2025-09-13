@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-09-13T04:24:11.516568Z",
+  "updated_at_utc": "2025-09-13T04:41:25.377360Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -35,6 +35,12 @@
       },
       {
         "date": "2025-05-12",
+        "price_dop": 290.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
         "price_dop": 290.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -76,6 +82,12 @@
         "price_dop": 272.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
+        "price_dop": 272.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -111,6 +123,12 @@
       },
       {
         "date": "2025-05-12",
+        "price_dop": 224.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
         "price_dop": 224.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -152,6 +170,12 @@
         "price_dop": 242.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
+        "price_dop": 242.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -187,6 +211,12 @@
       },
       {
         "date": "2025-05-12",
+        "price_dop": 194.06,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
         "price_dop": 194.06,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -228,6 +258,12 @@
         "price_dop": 225.4,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
+        "price_dop": 225.4,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "fueloil_6": [
@@ -263,6 +299,12 @@
       },
       {
         "date": "2025-05-12",
+        "price_dop": 154.9,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
         "price_dop": 154.9,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -304,6 +346,12 @@
         "price_dop": 171.0,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
+        "price_dop": 171.0,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "glp": [
@@ -342,6 +390,12 @@
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gas_natural": [
@@ -377,6 +431,12 @@
       },
       {
         "date": "2025-05-12",
+        "price_dop": 43.97,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-05-13",
         "price_dop": 43.97,
         "delta_abs": 0.0,
         "delta_pct": 0.0
