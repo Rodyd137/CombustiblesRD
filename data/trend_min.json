@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-09-23T15:09:40.359851Z",
+  "updated_at_utc": "2025-09-23T15:12:27.866967Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -26,6 +26,10 @@
       {
         "date": "2025-05-12",
         "price_dop": 290
+      },
+      {
+        "date": "2025-09-23",
+        "price_dop": 149
       }
     ],
     "gasolina_regular": [
@@ -52,6 +56,10 @@
       {
         "date": "2025-05-12",
         "price_dop": 272
+      },
+      {
+        "date": "2025-09-23",
+        "price_dop": 141
       }
     ],
     "gasoil_regular": [
@@ -78,6 +86,10 @@
       {
         "date": "2025-05-12",
         "price_dop": 225
+      },
+      {
+        "date": "2025-09-23",
+        "price_dop": 134
       }
     ],
     "gasoil_optimo": [
@@ -130,6 +142,10 @@
       {
         "date": "2025-05-12",
         "price_dop": 194
+      },
+      {
+        "date": "2025-09-23",
+        "price_dop": 6
       }
     ],
     "kerosene": [
@@ -156,6 +172,10 @@
       {
         "date": "2025-05-12",
         "price_dop": 225
+      },
+      {
+        "date": "2025-09-23",
+        "price_dop": 157
       }
     ],
     "fueloil_6": [
@@ -234,6 +254,10 @@
       {
         "date": "2025-05-12",
         "price_dop": 137
+      },
+      {
+        "date": "2025-09-23",
+        "price_dop": 86
       }
     ],
     "gas_natural": [
