@@ -1,53 +1,10 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2025/09/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-20-26-DE-SEP.-DE-2025-.pdf",
-  "updated_at_utc": "2025-09-23T15:42:21.827144Z",
+  "updated_at_utc": "2025-09-23T15:44:53.514883Z",
   "week": {
     "start_date": null,
     "end_date": null
   },
   "currency": "DOP",
-  "items": [
-    {
-      "label": "Gasolina Premium",
-      "key": "gasolina_premium",
-      "price_dop": 148.97,
-      "unit": "galon",
-      "change": null
-    },
-    {
-      "label": "Gasolina Regular",
-      "key": "gasolina_regular",
-      "price_dop": 140.63,
-      "unit": "galon",
-      "change": null
-    },
-    {
-      "label": "Gasoil Regular",
-      "key": "gasoil_regular",
-      "price_dop": 133.55,
-      "unit": "galon",
-      "change": null
-    },
-    {
-      "label": "Avtur",
-      "key": "avtur",
-      "price_dop": 6.5,
-      "unit": "galon",
-      "change": null
-    },
-    {
-      "label": "Kerosene",
-      "key": "kerosene",
-      "price_dop": 156.75,
-      "unit": "galon",
-      "change": null
-    },
-    {
-      "label": "Gas Licuado de Petróleo",
-      "key": "glp",
-      "price_dop": 86.3,
-      "unit": "galon",
-      "change": null
-    }
-  ]
+  "items": []
 }
