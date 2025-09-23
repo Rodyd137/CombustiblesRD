@@ -4,6 +4,7 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import fitz  # PyMuPDF
 import pytesseract
+from pytesseract import Output
 from PIL import Image
 
 # URLs del MICM
@@ -33,7 +34,7 @@ FUEL_KEYS = {
     "gas natural":      "gas_natural",
 }
 
-# Aliases que buscamos en el texto OCR por línea (minúsculas)
+# Aliases que buscamos por línea (minúsculas)
 LABEL_ALIASES = {
     "Gasolina Premium":  ["gasolina premium", "gas. premium", "gasolina prem"],
     "Gasolina Regular":  ["gasolina regular", "gas. regular", "gasolina reg"],
@@ -47,13 +48,17 @@ LABEL_ALIASES = {
     "Gas Natural":       ["gas natural"],
 }
 # Orden de salida
-FUEL_ORDER = ["Gasolina Premium","Gasolina Regular","Gasoil Regular","Gasoil Óptimo","Avtur","Kerosene","Fueloil #6","Fueloil 1%S","Gas Licuado de Petróleo (GLP)","Gas Natural"]
+FUEL_ORDER = [
+    "Gasolina Premium","Gasolina Regular","Gasoil Regular","Gasoil Óptimo",
+    "Avtur","Kerosene","Fueloil #6","Fueloil 1%S","Gas Licuado de Petróleo (GLP)","Gas Natural"
+]
 
 STOP_MARKERS = [
     "paridad de importación", "paridad de importacion",
     "estructura de precios", "precio paridad",
 ]
 
+# n con 2–4 dígitos enteros y dos decimales (ej. 290.10, 154,90, 43.97)
 NUM_RE = re.compile(r"(?<!\d)(\d{2,4}[.,]\d{2})(?!\d)")
 
 def ensure_dirs():
@@ -65,7 +70,6 @@ def pick_first_pdf(list_url: str):
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "lxml")
     links = [urljoin(list_url, a["href"]) for a in soup.select("a[href$='.pdf']")]
-    # prioriza PDFs de 2025; si no, devuelve el primero
     for u in links:
         if "2025" in u:
             return u
@@ -79,38 +83,66 @@ def get_latest_pdf():
     resp.raise_for_status()
     return url, resp.content
 
-# ---------- OCR POSICIONAL (por palabras) ----------
+# ---------- OCR POSICIONAL ----------
+def _to_int(x, default=0):
+    try:
+        return int(x)
+    except Exception:
+        try:
+            return int(float(x))
+        except Exception:
+            return default
+
+def _to_float(x, default=-1.0):
+    try:
+        return float(x)
+    except Exception:
+        try:
+            return float(str(x).replace(",", "."))
+        except Exception:
+            return default
+
 def ocr_image_to_lines(img: Image.Image, lang="spa+eng"):
     """
-    Devuelve una lista de líneas con posiciones y sus palabras:
+    Devuelve líneas con posiciones y sus palabras:
     [{ 'text': '...', 'y': center_y, 'x_min':..., 'x_max':..., 'words': [(w, x1, y1, x2, y2)] }, ...]
     """
-    data = pytesseract.image_to_data(img, lang=lang, config="--psm 6", output_type=pytesseract.Output.DICT)
-    n = len(data["text"])
+    data = pytesseract.image_to_data(img, lang=lang, config="--psm 6", output_type=Output.DICT)
+    n = len(data.get("text", []))
     lines = {}
     for i in range(n):
-        text = (data["text"][i] or "").strip()
-        conf = int(data["conf"][i]) if data["conf"][i].isdigit() else -1
-        if conf < 0 or not text:
+        text_raw = data["text"][i]
+        text = ("" if text_raw is None else str(text_raw)).strip()
+
+        conf_raw = data.get("conf", ["-1"]*n)[i]
+        conf = _to_float(conf_raw, default=-1.0)
+
+        if not text or conf < 0:  # si conf es -1 (ruido), lo saltamos
             continue
-        page_num = data.get("page_num",[0])[i]
-        block_num= data.get("block_num",[0])[i]
-        par_num  = data.get("par_num",[0])[i]
-        line_num = data.get("line_num",[0])[i]
-        left = data["left"][i]; top = data["top"][i]
-        w = data["width"][i]; h = data["height"][i]
+
+        left  = _to_int(data.get("left",  [0]*n)[i], 0)
+        top   = _to_int(data.get("top",   [0]*n)[i], 0)
+        width = _to_int(data.get("width", [0]*n)[i], 0)
+        height= _to_int(data.get("height",[0]*n)[i], 0)
+
+        page_num = _to_int(data.get("page_num",[0]*n)[i], 0)
+        block_num= _to_int(data.get("block_num",[0]*n)[i], 0)
+        par_num  = _to_int(data.get("par_num",  [0]*n)[i], 0)
+        line_num = _to_int(data.get("line_num", [0]*n)[i], 0)
+
         key = (page_num, block_num, par_num, line_num)
-        rec = lines.get(key, {"words":[], "x_min":1e9, "x_max":-1, "y_vals":[]})
-        rec["words"].append((text, left, top, left+w, top+h))
+        rec = lines.get(key, {"words":[], "x_min":10**9, "x_max":-1, "y_vals":[]})
+        rec["words"].append((text, left, top, left+width, top+height))
         rec["x_min"] = min(rec["x_min"], left)
-        rec["x_max"] = max(rec["x_max"], left+w)
-        rec["y_vals"].append(top + h/2)
+        rec["x_max"] = max(rec["x_max"], left+width)
+        rec["y_vals"].append(top + height/2)
         lines[key] = rec
+
     out = []
     for key, rec in sorted(lines.items(), key=lambda kv: (kv[0][0], kv[0][1], kv[0][2], kv[0][3])):
         words_sorted = sorted(rec["words"], key=lambda t: (t[1], t[2]))
         text = " ".join(w[0] for w in words_sorted)
-        y_center = sum(rec["y_vals"])/len(rec["y_vals"])
+        y_center = sum(rec["y_vals"])/len(rec["y_vals"]) if rec["y_vals"] else 0
         out.append({
             "key": key, "text": text, "text_l": text.lower(),
             "x_min": rec["x_min"], "x_max": rec["x_max"],
@@ -118,7 +150,7 @@ def ocr_image_to_lines(img: Image.Image, lang="spa+eng"):
         })
     return out
 
-def ocr_pdf_to_lines(pdf_bytes: bytes, pages=(0,1), dpi=320, lang="spa+eng"):
+def ocr_pdf_to_lines(pdf_bytes: bytes, pages=(0,1), dpi=330, lang="spa+eng"):
     lines = []
     with fitz.open(stream=pdf_bytes, filetype="pdf") as doc:
         max_page = min(doc.page_count, (pages[1]+1) if isinstance(pages, tuple) else doc.page_count)
@@ -130,13 +162,12 @@ def ocr_pdf_to_lines(pdf_bytes: bytes, pages=(0,1), dpi=320, lang="spa+eng"):
                 page_lines = ocr_image_to_lines(img, lang=lang)
             except Exception:
                 page_lines = ocr_image_to_lines(img, lang="eng")
-            # Adjunta el índice de página (para segmentar por ancla)
             for rec in page_lines:
                 rec["page_index"] = i
             lines.extend(page_lines)
     return lines
 
-# Buscar región entre el encabezado de "precio oficial..." y los marcadores de fin
+# Región entre “PRECIO OFICIAL…” y el siguiente bloque (paridad/estructura)
 def slice_official_region(lines):
     start_idx = None
     end_idx = None
@@ -145,8 +176,7 @@ def slice_official_region(lines):
             start_idx = idx
             break
     if start_idx is None:
-        return lines  # si no se encontró, devolvemos todo (fallback)
-    # Buscar primer STOP marcando fin
+        return lines  # fallback: todo
     for idx in range(start_idx+1, len(lines)):
         tl = lines[idx]["text_l"]
         if any(m in tl for m in STOP_MARKERS):
@@ -155,7 +185,7 @@ def slice_official_region(lines):
     return lines[start_idx: end_idx] if end_idx else lines[start_idx:]
 
 def parse_price_from_line_words(line_rec):
-    """Extrae el número más a la derecha en esa línea."""
+    """Número con dos decimales más a la derecha en esa línea."""
     nums = []
     for w,left,top,right,bottom in line_rec["words"]:
         m = NUM_RE.fullmatch(w) or re.search(NUM_RE, w)
@@ -163,27 +193,22 @@ def parse_price_from_line_words(line_rec):
             val = m.group(1).replace(",", ".")
             try:
                 price = float(val)
-                nums.append((price, right))  # usamos 'right' para elegir el más a la derecha
+                nums.append((price, right))
             except:
                 pass
     if not nums:
         return None
-    # número más a la derecha
     nums.sort(key=lambda t: t[1])
     return nums[-1][0]
 
 def nearest_price_same_or_next_line(lines, idx):
-    """Busca precio en la misma línea; si no, en la siguiente inmediata (misma página/bloque/par)."""
-    # misma línea
     p = parse_price_from_line_words(lines[idx])
     if p is not None:
         return p
-    # siguiente línea, si es el mismo bloque/parrafo (clave coincide salvo line_num)
     page, block, par, line = lines[idx]["key"]
     for j in range(idx+1, min(idx+4, len(lines))):
         p2, b2, pa2, l2 = lines[j]["key"]
         if p2 == page and b2 == block and pa2 == par and l2 in (line+1, line+2):
-            # Evita capturar variaciones tipo "sube/baja"
             txt = lines[j]["text_l"]
             if any(w in txt for w in ["sube", "baja", "mantiene", "variación", "variacion"]):
                 continue
@@ -208,7 +233,6 @@ def build_items_from_lines(lines):
 
     for canonical_label in FUEL_ORDER:
         aliases = LABEL_ALIASES[canonical_label]
-        # encuentra la primera línea de la región que contenga el alias
         cand_idx = None
         for i, rec in enumerate(region):
             tl = rec["text_l"]
@@ -222,8 +246,7 @@ def build_items_from_lines(lines):
         if price is None:
             continue
 
-        # saneo básico: precios al público por galón suelen estar entre 40 y 400
-        # (Gas Natural m³ ~ 30–60; igual está dentro)
+        # filtro rango razonable
         if not (20.0 <= price <= 500.0):
             continue
 
@@ -241,7 +264,7 @@ def build_items_from_lines(lines):
         })
     return items
 
-# (Opcional) detectar semana “del X al Y de <mes> de YYYY”
+# (Opcional) semana “del X al Y de <mes> de YYYY”
 SPANISH_MONTHS = {
     "enero":1,"febrero":2,"marzo":3,"abril":4,"mayo":5,"junio":6,
     "julio":7,"agosto":8,"septiembre":9,"setiembre":9,"octubre":10,"noviembre":11,"diciembre":12
@@ -260,17 +283,15 @@ def parse_week_from_lines(lines):
     return (f"{y:04d}-{month:02d}-{d1:02d}", f"{y:04d}-{month:02d}-{d2:02d}")
 
 def main():
-    os.makedirs(OUT_DIR, exist_ok=True)
-    os.makedirs(HIST_DIR, exist_ok=True)
-
+    ensure_dirs()
     pdf_url, pdf_bytes = get_latest_pdf()
 
-    # OCR posicional de las 1–2 primeras páginas (donde viene la tabla oficial)
+    # OCR posicional de las 1–2 primeras páginas
     lines = ocr_pdf_to_lines(pdf_bytes, pages=(0,1), dpi=330, lang="spa+eng")
 
     items = build_items_from_lines(lines)
-    # safety-net: si no encontró nada, intenta sobre TODAS las líneas (sin recorte de región)
     if not items:
+        # safety-net: intenta sobre TODAS las líneas
         items = build_items_from_lines(lines=lines)
 
     s, e = parse_week_from_lines(lines)
