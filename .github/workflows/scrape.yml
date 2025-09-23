@@ -24,9 +24,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
 
-      # Ejecuta el scraper SIN secret (usa la URL por defecto del script)
-      - name: Run scraper
-        run: python scraper/scraper.py
+      # ======= NUEVO: usa el PDF del MICM =======
+      - name: Run scraper (MICM)
+        run: python scraper/micm_scraper.py
+      # ==========================================
 
       - name: Build trend (full)
         run: python scraper/build_trend.py
@@ -34,7 +35,6 @@ jobs:
       - name: Build trend (min)
         run: python scraper/build_trend_min.py
 
-      # === Depuración: lista archivos generados ===
       - name: List files
         run: |
           echo "PWD:" && pwd
@@ -42,13 +42,11 @@ jobs:
           echo "DATA:" && ls -la data || true
           echo "HISTORY:" && ls -la data/history || true
 
-      # === Depuración: muestra preview del JSON (si existe) ===
       - name: Show latest.json preview
         run: |
           echo "---- latest.json (head) ----"
           head -n 80 data/latest.json || true
-          
-      # === Create a History of Pricings
+
       - name: Show trend.json preview
         run: |
           echo "---- trend.json (head) ----"
