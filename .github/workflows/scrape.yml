@@ -24,10 +24,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
 
-      # ======= NUEVO: usa el PDF del MICM =======
+      # === Usa el PDF del MICM (precio al público) ===
       - name: Run scraper (MICM)
         run: python scraper/micm_scraper.py
-      # ==========================================
 
       - name: Build trend (full)
         run: python scraper/build_trend.py
@@ -45,7 +44,7 @@ jobs:
       - name: Show latest.json preview
         run: |
           echo "---- latest.json (head) ----"
-          head -n 80 data/latest.json || true
+          head -n 120 data/latest.json || true
 
       - name: Show trend.json preview
         run: |
