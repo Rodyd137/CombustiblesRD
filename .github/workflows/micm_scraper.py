@@ -1,0 +1,67 @@
+# .github/workflows/scrape.yml
+name: Scrape & Publish
+
+on:
+  schedule:
+    - cron: "0 22 * * FRI"   # Viernes 6:00 PM RD
+    - cron: "*/30 * * * *"   # Cada 30 min (redundancia)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scraper/requirements.txt
+
+      # ======= NUEVO: usa el PDF del MICM =======
+      - name: Run scraper (MICM)
+        run: python scraper/micm_scraper.py
+      # ==========================================
+
+      - name: Build trend (full)
+        run: python scraper/build_trend.py
+
+      - name: Build trend (min)
+        run: python scraper/build_trend_min.py
+
+      - name: List files
+        run: |
+          echo "PWD:" && pwd
+          echo "ROOT:" && ls -la
+          echo "DATA:" && ls -la data || true
+          echo "HISTORY:" && ls -la data/history || true
+
+      - name: Show latest.json preview
+        run: |
+          echo "---- latest.json (head) ----"
+          head -n 80 data/latest.json || true
+
+      - name: Show trend.json preview
+        run: |
+          echo "---- trend.json (head) ----"
+          head -n 80 data/trend.json || true
+
+      - name: Show trend_min.json preview
+        run: |
+          echo "---- trend_min.json (head) ----"
+          head -n 80 data/trend_min.json || true
+
+      - name: Commit & push data
+        run: |
+          git config user.name "gh-actions"
+          git config user.email "actions@github.com"
+          git add data
+          git commit -m "data: update $(date -u +'%Y-%m-%d %H:%M:%S')" || echo "Nothing new to commit"
+          git push || true
