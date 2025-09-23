@@ -3,7 +3,7 @@ name: Scrape & Publish
 on:
   schedule:
     - cron: "0 22 * * FRI"   # Viernes 6:00 PM RD
-    - cron: "*/30 * * * *"   # Cada 30 min (redundancia)
+    - cron: "*/30 * * * *"   # Redundancia
   workflow_dispatch:
 
 permissions:
@@ -15,6 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 👇 Necesario para Tesseract (OCR)
+      - name: Install OCR deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-spa || sudo apt-get install -y tesseract-ocr
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -24,9 +30,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
 
-      # === Usa el PDF del MICM (precio al público) ===
-      - name: Run scraper (MICM)
-        run: python scraper/micm_scraper.py
+      - name: Run scraper
+        run: python scraper/scraper.py
 
       - name: Build trend (full)
         run: python scraper/build_trend.py
