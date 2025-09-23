@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-09-23T16:56:08.782298Z",
+  "updated_at_utc": "2025-09-23T17:28:36.951538Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -41,9 +41,9 @@
       },
       {
         "date": "2025-09-23",
-        "price_dop": 224.8,
-        "delta_abs": -65.3,
-        "delta_pct": -22.5095
+        "price_dop": 290.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasolina_regular": [
@@ -85,9 +85,9 @@
       },
       {
         "date": "2025-09-23",
-        "price_dop": 209.4,
-        "delta_abs": -63.1,
-        "delta_pct": -23.156
+        "price_dop": 272.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -129,9 +129,9 @@
       },
       {
         "date": "2025-09-23",
-        "price_dop": 202.72,
-        "delta_abs": -22.08,
-        "delta_pct": -9.8221
+        "price_dop": 224.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_optimo": [
@@ -173,9 +173,9 @@
       },
       {
         "date": "2025-09-23",
-        "price_dop": 229.5,
-        "delta_abs": -12.6,
-        "delta_pct": -5.2045
+        "price_dop": 242.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -217,9 +217,9 @@
       },
       {
         "date": "2025-09-23",
-        "price_dop": 272.5,
-        "delta_abs": 78.44,
-        "delta_pct": 40.4205
+        "price_dop": 198.09,
+        "delta_abs": 4.03,
+        "delta_pct": 2.0767
       }
     ],
     "kerosene": [
@@ -261,9 +261,9 @@
       },
       {
         "date": "2025-09-23",
-        "price_dop": 154.33,
-        "delta_abs": -71.07,
-        "delta_pct": -31.5306
+        "price_dop": 229.5,
+        "delta_abs": 4.1,
+        "delta_pct": 1.819
       }
     ],
     "fueloil_6": [
@@ -381,9 +381,9 @@
       },
       {
         "date": "2025-09-23",
-        "price_dop": 429.95,
-        "delta_abs": 292.75,
-        "delta_pct": 213.3746
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gas_natural": [
