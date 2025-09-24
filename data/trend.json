@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-09-23T23:39:56.807601Z",
+  "updated_at_utc": "2025-09-24T03:49:07.736707Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -41,6 +41,12 @@
       },
       {
         "date": "2025-09-23",
+        "price_dop": 290.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-09-24",
         "price_dop": 290.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -88,6 +94,12 @@
         "price_dop": 272.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-09-24",
+        "price_dop": 272.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -129,6 +141,12 @@
       },
       {
         "date": "2025-09-23",
+        "price_dop": 224.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-09-24",
         "price_dop": 224.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -176,6 +194,12 @@
         "price_dop": 242.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-09-24",
+        "price_dop": 242.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -220,6 +244,12 @@
         "price_dop": 198.09,
         "delta_abs": 4.03,
         "delta_pct": 2.0767
+      },
+      {
+        "date": "2025-09-24",
+        "price_dop": 198.09,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "kerosene": [
@@ -264,6 +294,12 @@
         "price_dop": 229.5,
         "delta_abs": 4.1,
         "delta_pct": 1.819
+      },
+      {
+        "date": "2025-09-24",
+        "price_dop": 229.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "fueloil_6": [
@@ -381,6 +417,12 @@
       },
       {
         "date": "2025-09-23",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-09-24",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
