@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-10-09T23:39:42.942660Z",
+  "updated_at_utc": "2025-10-10T01:45:37.463411Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -95,6 +95,12 @@
       },
       {
         "date": "2025-10-09",
+        "price_dop": 290.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-10-10",
         "price_dop": 290.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -238,6 +244,12 @@
         "price_dop": 272.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-10-10",
+        "price_dop": 272.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -375,6 +387,12 @@
       },
       {
         "date": "2025-10-09",
+        "price_dop": 224.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-10-10",
         "price_dop": 224.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -518,6 +536,12 @@
         "price_dop": 242.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-10-10",
+        "price_dop": 242.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -658,6 +682,12 @@
         "price_dop": 203.57,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-10-10",
+        "price_dop": 203.57,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "kerosene": [
@@ -795,6 +825,12 @@
       },
       {
         "date": "2025-10-09",
+        "price_dop": 235.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-10-10",
         "price_dop": 235.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -1011,6 +1047,12 @@
       },
       {
         "date": "2025-10-09",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-10-10",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
