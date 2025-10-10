@@ -1,19 +1,12 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2025/10/AVISO-PRE.-SEM.CORTE-04-10-DE-OCT.-DE-2025-.pdf",
-  "updated_at_utc": "2025-10-10T19:40:12.644392Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2025/10/AVISO-PRE.-SEM.CORTE-11-17-DE-OCT.-DE-2025-.pdf",
+  "updated_at_utc": "2025-10-10T20:25:27.894699Z",
   "week": {
     "start_date": null,
     "end_date": null
   },
   "currency": "DOP",
   "items": [
-    {
-      "label": "Gasolina Premium",
-      "key": "gasolina_premium",
-      "price_dop": 290.1,
-      "unit": "galon",
-      "change": null
-    },
     {
       "label": "Gasolina Regular",
       "key": "gasolina_regular",
@@ -38,14 +31,14 @@
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 203.57,
+      "price_dop": 199.7,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 235.5,
+      "price_dop": 231.3,
       "unit": "galon",
       "change": null
     },
