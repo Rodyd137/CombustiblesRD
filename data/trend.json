@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-10-17T18:30:06.056811Z",
+  "updated_at_utc": "2025-10-17T18:50:22.543886Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -847,9 +847,9 @@
       },
       {
         "date": "2025-10-17",
-        "price_dop": 199.7,
-        "delta_abs": 0.0,
-        "delta_pct": 0.0
+        "price_dop": 199.52,
+        "delta_abs": -0.18,
+        "delta_pct": -0.0901
       }
     ],
     "kerosene": [
@@ -1035,9 +1035,9 @@
       },
       {
         "date": "2025-10-17",
-        "price_dop": 231.3,
-        "delta_abs": 0.0,
-        "delta_pct": 0.0
+        "price_dop": 230.7,
+        "delta_abs": -0.6,
+        "delta_pct": -0.2594
       }
     ],
     "fueloil_6": [

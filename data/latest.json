@@ -1,6 +1,6 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2025/10/AVISO-PRE.-SEM.CORTE-11-17-DE-OCT.-DE-2025-.pdf",
-  "updated_at_utc": "2025-10-17T18:30:05.982090Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2025/10/AVISO-PRE.-SEM.CORTE-18-24-DE-OCT.-DE-2025-.pdf",
+  "updated_at_utc": "2025-10-17T18:50:22.461888Z",
   "week": {
     "start_date": null,
     "end_date": null
@@ -31,14 +31,14 @@
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 199.7,
+      "price_dop": 199.52,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 231.3,
+      "price_dop": 230.7,
       "unit": "galon",
       "change": null
     },
