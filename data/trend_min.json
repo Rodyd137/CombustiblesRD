@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-10-24T17:41:47.071655Z",
+  "updated_at_utc": "2025-10-24T18:30:58.031879Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -681,7 +681,7 @@
       },
       {
         "date": "2025-10-24",
-        "price_dop": 200
+        "price_dop": 196
       }
     ],
     "kerosene": [
@@ -835,7 +835,7 @@
       },
       {
         "date": "2025-10-24",
-        "price_dop": 231
+        "price_dop": 228
       }
     ],
     "fueloil_6": [
