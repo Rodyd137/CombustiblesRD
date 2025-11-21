@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-11-21T18:30:54.695614Z",
+  "updated_at_utc": "2025-11-21T19:19:42.285774Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -93,6 +93,10 @@
       },
       {
         "date": "2025-11-06",
+        "price_dop": 290
+      },
+      {
+        "date": "2025-11-21",
         "price_dop": 290
       }
     ],

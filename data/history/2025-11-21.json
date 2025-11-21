@@ -1,12 +1,19 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2025/11/AVISO-PRE.-SEM.CORTE-15-21-DE-NOV.-DE-2025-.pdf",
-  "updated_at_utc": "2025-11-21T18:30:54.575123Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2025/11/AVISO-PRECIOS-COMBUSTIBLES.pdf",
+  "updated_at_utc": "2025-11-21T19:19:42.163378Z",
   "week": {
     "start_date": null,
     "end_date": null
   },
   "currency": "DOP",
   "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 290.1,
+      "unit": "galon",
+      "change": null
+    },
     {
       "label": "Gasolina Regular",
       "key": "gasolina_regular",
@@ -31,14 +38,14 @@
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 212.66,
+      "price_dop": 212.86,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 245.5,
+      "price_dop": 245.6,
       "unit": "galon",
       "change": null
     },
