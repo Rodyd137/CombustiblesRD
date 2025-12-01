@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-11-30T23:40:46.231670Z",
+  "updated_at_utc": "2025-12-01T02:11:31.386977Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -424,6 +424,10 @@
       {
         "date": "2025-11-30",
         "price_dop": 272
+      },
+      {
+        "date": "2025-12-01",
+        "price_dop": 272
       }
     ],
     "gasoil_regular": [
@@ -726,6 +730,10 @@
       {
         "date": "2025-11-30",
         "price_dop": 225
+      },
+      {
+        "date": "2025-12-01",
+        "price_dop": 225
       }
     ],
     "gasoil_optimo": [
@@ -1027,6 +1035,10 @@
       },
       {
         "date": "2025-11-30",
+        "price_dop": 242
+      },
+      {
+        "date": "2025-12-01",
         "price_dop": 242
       }
     ],
@@ -1905,6 +1917,10 @@
       },
       {
         "date": "2025-11-30",
+        "price_dop": 137
+      },
+      {
+        "date": "2025-12-01",
         "price_dop": 137
       }
     ],
