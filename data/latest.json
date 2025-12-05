@@ -1,6 +1,6 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2025/11/AVISO-PRECIOS-COMBUSTIBLES-SEMANA-DEL-29-NOV-AL-05-DE-DICIEMBRE-DE-2025.pdf",
-  "updated_at_utc": "2025-12-05T19:20:22.516004Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2025/12/AVISO-PRECIOS-COMBUSTIBLES-SEM-DEL-06-AL-12-2025.pdf",
+  "updated_at_utc": "2025-12-05T19:39:34.836611Z",
   "week": {
     "start_date": null,
     "end_date": null
@@ -25,6 +25,20 @@
       "label": "Gasoil Óptimo",
       "key": "gasoil_optimo",
       "price_dop": 242.1,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Avtur",
+      "key": "avtur",
+      "price_dop": 197.45,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Kerosene",
+      "key": "kerosene",
+      "price_dop": 229.2,
       "unit": "galon",
       "change": null
     },
