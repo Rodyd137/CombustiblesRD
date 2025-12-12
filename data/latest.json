@@ -1,12 +1,19 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2025/12/AVISO-PRECIOS-COMBUSTIBLES-SEM-DEL-06-AL-12-2025.pdf",
-  "updated_at_utc": "2025-12-12T18:37:00.080433Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2025/12/AVISO-PRECIOS-COMBUSTIBLES-SEMANA-DEL-13-19-DE-DICIEMBRE-DE-2025.pdf",
+  "updated_at_utc": "2025-12-12T19:19:59.495713Z",
   "week": {
     "start_date": null,
     "end_date": null
   },
   "currency": "DOP",
   "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 290.1,
+      "unit": "galon",
+      "change": null
+    },
     {
       "label": "Gasolina Regular",
       "key": "gasolina_regular",
@@ -31,7 +38,7 @@
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 197.45,
+      "price_dop": 197.24,
       "unit": "galon",
       "change": null
     },
