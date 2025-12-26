@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-12-25T23:42:25.159266Z",
+  "updated_at_utc": "2025-12-26T01:58:35.304847Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -826,6 +826,12 @@
         "price_dop": 272.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-26",
+        "price_dop": 272.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -1428,6 +1434,12 @@
         "price_dop": 224.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-26",
+        "price_dop": 224.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_optimo": [
@@ -2027,6 +2039,12 @@
       },
       {
         "date": "2025-12-25",
+        "price_dop": 242.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-26",
         "price_dop": 242.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -3657,6 +3675,12 @@
       },
       {
         "date": "2025-12-25",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-26",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
