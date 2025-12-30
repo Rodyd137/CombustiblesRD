@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2025-12-29T23:42:17.228536Z",
+  "updated_at_utc": "2025-12-30T02:00:05.637769Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -850,6 +850,12 @@
         "price_dop": 272.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-30",
+        "price_dop": 272.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -1473,6 +1479,12 @@
       },
       {
         "date": "2025-12-29",
+        "price_dop": 224.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-30",
         "price_dop": 224.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -2102,6 +2114,12 @@
         "price_dop": 242.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-30",
+        "price_dop": 242.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -2602,6 +2620,12 @@
         "price_dop": 186.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-30",
+        "price_dop": 186.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "kerosene": [
@@ -3099,6 +3123,12 @@
       },
       {
         "date": "2025-12-29",
+        "price_dop": 217.9,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-30",
         "price_dop": 217.9,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -3801,6 +3831,12 @@
       },
       {
         "date": "2025-12-29",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2025-12-30",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
