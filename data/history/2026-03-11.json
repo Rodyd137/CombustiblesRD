@@ -1,12 +1,19 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2025/12/AVISO-PRECIOS-COMBUSTIBLES-SEMANAL-DEL-27-DE-DICIEMBRE-2025-AL-2-DE-ENERO-2026.pdf",
-  "updated_at_utc": "2026-03-11T21:37:43.555676Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2026/03/AVISO-PRE.-SEM.CORTE-07-13-de-mar.-DE-2026.pdf",
+  "updated_at_utc": "2026-03-11T22:30:59.926606Z",
   "week": {
     "start_date": null,
     "end_date": null
   },
   "currency": "DOP",
   "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 290.1,
+      "unit": "galon",
+      "change": null
+    },
     {
       "label": "Gasolina Regular",
       "key": "gasolina_regular",
@@ -31,14 +38,14 @@
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 186.8,
+      "price_dop": 29.38,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 217.9,
+      "price_dop": 32.2,
       "unit": "galon",
       "change": null
     },
