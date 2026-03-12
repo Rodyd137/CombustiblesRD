@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-03-11T23:31:05.125164Z",
+  "updated_at_utc": "2026-03-12T02:31:45.756470Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -227,6 +227,12 @@
       },
       {
         "date": "2026-03-11",
+        "price_dop": 290.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-12",
         "price_dop": 290.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -1282,6 +1288,12 @@
         "price_dop": 272.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-12",
+        "price_dop": 272.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -2331,6 +2343,12 @@
       },
       {
         "date": "2026-03-11",
+        "price_dop": 224.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-12",
         "price_dop": 224.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -3386,6 +3404,12 @@
         "price_dop": 242.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-12",
+        "price_dop": 242.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -4312,6 +4336,12 @@
         "price_dop": 29.38,
         "delta_abs": -157.42,
         "delta_pct": -84.2719
+      },
+      {
+        "date": "2026-03-12",
+        "price_dop": 29.38,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "kerosene": [
@@ -5238,6 +5268,12 @@
         "price_dop": 32.2,
         "delta_abs": -185.7,
         "delta_pct": -85.2226
+      },
+      {
+        "date": "2026-03-12",
+        "price_dop": 32.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "fueloil_6": [
@@ -6363,6 +6399,12 @@
       },
       {
         "date": "2026-03-11",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-12",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
