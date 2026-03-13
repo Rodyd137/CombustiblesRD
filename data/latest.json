@@ -1,6 +1,6 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2026/03/AVISO-PRE.-SEM.CORTE-07-13-de-mar.-DE-2026.pdf",
-  "updated_at_utc": "2026-03-13T19:55:46.839565Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2026/03/AVISO-PRE.-SEM.CORTE-14-20-de-mar.-DE-2026-5-pesos.pdf",
+  "updated_at_utc": "2026-03-13T20:41:10.381851Z",
   "week": {
     "start_date": null,
     "end_date": null
@@ -10,42 +10,42 @@
     {
       "label": "Gasolina Premium",
       "key": "gasolina_premium",
-      "price_dop": 290.1,
+      "price_dop": 295.1,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Gasolina Regular",
       "key": "gasolina_regular",
-      "price_dop": 272.5,
+      "price_dop": 277.5,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Gasoil Regular",
       "key": "gasoil_regular",
-      "price_dop": 224.8,
+      "price_dop": 229.8,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Gasoil Óptimo",
       "key": "gasoil_optimo",
-      "price_dop": 242.1,
+      "price_dop": 247.1,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 29.38,
+      "price_dop": 67.37,
       "unit": "galon",
       "change": null
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 32.2,
+      "price_dop": 73.2,
       "unit": "galon",
       "change": null
     },
