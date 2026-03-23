@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-03-22T23:34:52.659292Z",
+  "updated_at_utc": "2026-03-23T02:40:00.454128Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -4570,6 +4570,12 @@
         "price_dop": 21.09,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-23",
+        "price_dop": 21.09,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "kerosene": [
@@ -5559,6 +5565,12 @@
       },
       {
         "date": "2026-03-22",
+        "price_dop": 22.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-23",
         "price_dop": 22.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -6753,6 +6765,12 @@
       },
       {
         "date": "2026-03-22",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-03-23",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
