@@ -1,6 +1,6 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2026/03/AVISO-PRE.-SEM.CORTE-21-27-de-mar.-DE-2026-.pdf",
-  "updated_at_utc": "2026-03-27T19:23:03.815947Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2026/03/AVISO-PRE.-SEM.CORTE-28-mar-03-de-abril.-DE-2026-.pdf",
+  "updated_at_utc": "2026-03-27T19:59:17.435911Z",
   "week": {
     "start_date": null,
     "end_date": null
@@ -8,16 +8,30 @@
   "currency": "DOP",
   "items": [
     {
-      "label": "Avtur",
-      "key": "avtur",
-      "price_dop": 21.09,
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 305.1,
       "unit": "galon",
       "change": null
     },
     {
-      "label": "Kerosene",
-      "key": "kerosene",
-      "price_dop": 22.8,
+      "label": "Gasolina Regular",
+      "key": "gasolina_regular",
+      "price_dop": 287.5,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Regular",
+      "key": "gasoil_regular",
+      "price_dop": 239.8,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 257.1,
       "unit": "galon",
       "change": null
     },

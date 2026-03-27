@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-03-27T19:23:04.018996Z",
+  "updated_at_utc": "2026-03-27T19:59:17.587115Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -186,6 +186,10 @@
       {
         "date": "2026-03-19",
         "price_dop": 295
+      },
+      {
+        "date": "2026-03-27",
+        "price_dop": 305
       }
     ],
     "gasolina_regular": [
@@ -920,6 +924,10 @@
       {
         "date": "2026-03-19",
         "price_dop": 278
+      },
+      {
+        "date": "2026-03-27",
+        "price_dop": 288
       }
     ],
     "gasoil_regular": [
@@ -1654,6 +1662,10 @@
       {
         "date": "2026-03-19",
         "price_dop": 230
+      },
+      {
+        "date": "2026-03-27",
+        "price_dop": 240
       }
     ],
     "gasoil_optimo": [
@@ -2388,6 +2400,10 @@
       {
         "date": "2026-03-19",
         "price_dop": 247
+      },
+      {
+        "date": "2026-03-27",
+        "price_dop": 257
       }
     ],
     "avtur": [
@@ -3066,10 +3082,6 @@
       {
         "date": "2026-03-26",
         "price_dop": 21
-      },
-      {
-        "date": "2026-03-27",
-        "price_dop": 21
       }
     ],
     "kerosene": [
@@ -3747,10 +3759,6 @@
       },
       {
         "date": "2026-03-26",
-        "price_dop": 23
-      },
-      {
-        "date": "2026-03-27",
         "price_dop": 23
       }
     ],
