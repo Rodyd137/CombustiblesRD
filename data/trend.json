@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-04-16T23:45:54.464509Z",
+  "updated_at_utc": "2026-04-17T02:55:48.662814Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -401,6 +401,12 @@
       },
       {
         "date": "2026-04-16",
+        "price_dop": 314.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-04-17",
         "price_dop": 314.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -1630,6 +1636,12 @@
         "price_dop": 294.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-04-17",
+        "price_dop": 294.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -2853,6 +2865,12 @@
       },
       {
         "date": "2026-04-16",
+        "price_dop": 246.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-04-17",
         "price_dop": 246.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -4082,6 +4100,12 @@
         "price_dop": 266.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-04-17",
+        "price_dop": 266.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -5140,6 +5164,12 @@
         "price_dop": 357.31,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-04-17",
+        "price_dop": 357.31,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "kerosene": [
@@ -6195,6 +6225,12 @@
       },
       {
         "date": "2026-04-16",
+        "price_dop": 401.9,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-04-17",
         "price_dop": 401.9,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -7539,6 +7575,12 @@
       },
       {
         "date": "2026-04-16",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-04-17",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
