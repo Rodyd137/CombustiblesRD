@@ -1,10 +1,53 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2026/04/AVISO-DE-PRECIO-GN.pdf",
-  "updated_at_utc": "2026-04-19T20:01:39.475907Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2026/04/AVISO-PRE.-SEM.CORTE-18-24-de-abril.-DE-2026-.pdf",
+  "updated_at_utc": "2026-04-19T21:03:36.768872Z",
   "week": {
     "start_date": null,
     "end_date": null
   },
   "currency": "DOP",
-  "items": []
+  "items": [
+    {
+      "label": "Gasolina Regular",
+      "key": "gasolina_regular",
+      "price_dop": 294.5,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Regular",
+      "key": "gasoil_regular",
+      "price_dop": 246.8,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 266.1,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Avtur",
+      "key": "avtur",
+      "price_dop": 38.66,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Kerosene",
+      "key": "kerosene",
+      "price_dop": 41.9,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gas Licuado de Petróleo (GLP)",
+      "key": "glp",
+      "price_dop": 137.2,
+      "unit": "galon",
+      "change": null
+    }
+  ]
 }
