@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-05-09T23:25:14.408673Z",
+  "updated_at_utc": "2026-05-10T00:12:33.725267Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -497,6 +497,12 @@
       },
       {
         "date": "2026-05-09",
+        "price_dop": 323.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-05-10",
         "price_dop": 323.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -1852,6 +1858,12 @@
         "price_dop": 301.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-05-10",
+        "price_dop": 301.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -3204,6 +3216,12 @@
         "price_dop": 253.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-05-10",
+        "price_dop": 253.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_optimo": [
@@ -4553,6 +4571,12 @@
       },
       {
         "date": "2026-05-09",
+        "price_dop": 275.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-05-10",
         "price_dop": 275.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -8199,6 +8223,12 @@
       },
       {
         "date": "2026-05-09",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-05-10",
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
