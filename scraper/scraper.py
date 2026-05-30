@@ -264,23 +264,142 @@ def build_items_from_lines(lines):
         })
     return items
 
-# (Opcional) semana “del X al Y de <mes> de YYYY”
+# --- Detección de la semana de vigencia ---
+# La MICM publica el aviso semanal con el rango "del DD al DD de MES de AAAA".
+# Hay varias variaciones (a veces con "del DD de MES al DD de MES", a veces
+# saltos de meses cuando cubre fin-de-mes, a veces OCR pierde tildes/acentos).
+# Probamos varios patrones en orden y devolvemos el primer match válido.
 SPANISH_MONTHS = {
     "enero":1,"febrero":2,"marzo":3,"abril":4,"mayo":5,"junio":6,
     "julio":7,"agosto":8,"septiembre":9,"setiembre":9,"octubre":10,"noviembre":11,"diciembre":12
 }
+
+SPANISH_MONTHS_SHORT_ES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"]
+
+
+def _normalize_es(s: str) -> str:
+    """Strip Spanish accents/tildes so regex is more permissive vs OCR errors."""
+    return (s or "").lower() \
+        .replace("á","a").replace("é","e").replace("í","i") \
+        .replace("ó","o").replace("ú","u").replace("ñ","n")
+
+
 def parse_week_from_lines(lines):
-    text = "  ".join(rec["text_l"] for rec in lines[:80])
-    m = re.search(r"del\s+(\d{1,2}).{0,20}?al\s+(\d{1,2}).{0,20}?de\s+([a-záéíóúñ]+).{0,20}?de\s+(\d{4})", text, re.IGNORECASE)
-    if not m:
+    """
+    Returns (start_iso, end_iso) — both 'YYYY-MM-DD' — or (None, None).
+    Tries multiple shapes that the MICM has used over time. Patterns that
+    match the regex but produce a date pair that doesn't validate (negative
+    span, out-of-range, etc.) fall through to the next pattern instead of
+    short-circuiting.
+    """
+    # Concatenate the first chunk of OCR text (header normally).
+    text_raw = "  ".join(rec["text_l"] for rec in lines[:120])
+    text = _normalize_es(text_raw)
+
+    # --- Pattern B (cross-month, most explicit) FIRST so we don't get fooled
+    # by Pattern A swallowing a multi-month range like
+    # "del 30 de mayo al 5 de junio".
+    m = re.search(
+        r"del\s+(\d{1,2})\s+de\s+([a-z]+).{0,40}?al\s+(\d{1,2})\s+de\s+([a-z]+).{0,30}?de\s+(\d{4})",
+        text,
+    )
+    if m:
+        d1, mon1, d2, mon2, y = m.groups()
+        month1 = SPANISH_MONTHS.get(mon1)
+        month2 = SPANISH_MONTHS.get(mon2)
+        if month1 and month2:
+            y = int(y); d1 = int(d1); d2 = int(d2)
+            # If start month is December and end month is January → end year is +1.
+            end_year = y + 1 if (month1 == 12 and month2 == 1) else y
+            start_year = y - 1 if (month1 == 12 and month2 == 1 and end_year == y + 1) else y
+            # Reset: most documents quote only the END year for dec→jan ranges,
+            # but the start was in the previous calendar year.
+            if month1 == 12 and month2 == 1:
+                start_year = y; end_year = y + 1
+            s, e = _safe_pair(start_year, month1, d1, end_year, month2, d2)
+            if s and e:
+                return s, e
+
+    # --- Pattern A (same month at the end): "del 30 al 5 de junio de 2026"
+    # Note that when d1 > d2 with a single month tail, the intended start is
+    # actually the *previous* month (e.g. "del 30 al 5 de junio" = May 30 → Jun 5).
+    m = re.search(
+        r"del\s+(\d{1,2})\b.{0,30}?al\s+(\d{1,2})\b.{0,30}?de\s+([a-z]+).{0,30}?de\s+(\d{4})",
+        text,
+    )
+    if m:
+        d1, d2, mon, y = m.groups()
+        month = SPANISH_MONTHS.get(mon)
+        if month:
+            y = int(y); d1 = int(d1); d2 = int(d2)
+            if d1 <= d2:
+                # Same month.
+                s, e = _safe_pair(y, month, d1, y, month, d2)
+            else:
+                # d1 > d2 → d1 belongs to the previous month.
+                prev_month = month - 1 or 12
+                prev_year = y - 1 if month == 1 else y
+                s, e = _safe_pair(prev_year, prev_month, d1, y, month, d2)
+            if s and e:
+                return s, e
+
+    # --- Pattern C: vigencia/vigente prefix, same-month tail.
+    m = re.search(
+        r"(?:vigencia|vigente)[^0-9]{0,40}(\d{1,2})\b.{0,30}?al\s+(\d{1,2})\b.{0,30}?de\s+([a-z]+).{0,30}?(\d{4})",
+        text,
+    )
+    if m:
+        d1, d2, mon, y = m.groups()
+        month = SPANISH_MONTHS.get(mon)
+        if month:
+            y = int(y); d1 = int(d1); d2 = int(d2)
+            if d1 <= d2:
+                s, e = _safe_pair(y, month, d1, y, month, d2)
+            else:
+                prev_month = month - 1 or 12
+                prev_year = y - 1 if month == 1 else y
+                s, e = _safe_pair(prev_year, prev_month, d1, y, month, d2)
+            if s and e:
+                return s, e
+
+    return None, None
+
+
+def _safe_pair(y1, m1, d1, y2, m2, d2):
+    """Validate two YYYY-MM-DD dates make sense; return ISO strings or (None, None)."""
+    try:
+        start = datetime.date(y1, m1, d1)
+        end = datetime.date(y2, m2, d2)
+    except ValueError:
         return None, None
-    d1, d2, mon, y = m.groups()
-    mon = (mon or "").replace("é","e").replace("í","i").replace("ó","o").replace("ú","u").replace("ñ","n")
-    month = SPANISH_MONTHS.get(mon, None)
-    if not month:
+    if (end - start).days < 0 or (end - start).days > 14:
+        # MICM weeks are 7 days; allow up to 14 to be safe but reject obvious junk.
         return None, None
-    y = int(y); d1 = int(d1); d2 = int(d2)
-    return (f"{y:04d}-{month:02d}-{d1:02d}", f"{y:04d}-{month:02d}-{d2:02d}")
+    return start.isoformat(), end.isoformat()
+
+
+def build_week_label(start_iso, end_iso):
+    """
+    Human-friendly Spanish label for the week, e.g.:
+      "Vigente: 30 may – 5 jun 2026"
+      "Vigente: 1 – 7 jun 2026"        (same month)
+      "Vigente: 30 dic 2025 – 5 ene 2026"  (cross-year)
+    Returns None if dates are missing or unparseable.
+    """
+    if not start_iso or not end_iso:
+        return None
+    try:
+        s = datetime.date.fromisoformat(start_iso)
+        e = datetime.date.fromisoformat(end_iso)
+    except Exception:
+        return None
+    sm = SPANISH_MONTHS_SHORT_ES[s.month - 1]
+    em = SPANISH_MONTHS_SHORT_ES[e.month - 1]
+    if s.year != e.year:
+        return f"Vigente: {s.day} {sm} {s.year} – {e.day} {em} {e.year}"
+    if s.month != e.month:
+        return f"Vigente: {s.day} {sm} – {e.day} {em} {e.year}"
+    return f"Vigente: {s.day} – {e.day} {sm} {e.year}"
 
 # Minimum number of fuel items we expect from a healthy run.
 # The MICM publication usually lists 8–10 products. If the OCR returns less
@@ -375,6 +494,7 @@ def main():
         )
 
     s, e = parse_week_from_lines(lines)
+    week_label = build_week_label(s, e)   # M6: human-friendly "Vigente: 30 may – 5 jun 2026"
 
     # ---- M2: compute per-item delta vs previous week ----
     prev_payload = _load_previous_latest()
@@ -383,15 +503,26 @@ def main():
     payload = {
         "source": pdf_url,
         "updated_at_utc": _utc_now_iso(),
-        "week": {"start_date": s, "end_date": e},
+        "week": {
+            "start_date": s,
+            "end_date": e,
+            "label": week_label,
+        },
+        # Mirror the label at the top level too: the Swift client (FuelFeed)
+        # already declares `week_label` as an optional decode target.
+        "week_label": week_label,
         "currency": "DOP",
         "items": items
     }
 
     # ---- M3: write only if the canonical content actually changed ----
+    # Compare only the start/end dates of the week (label is derived from
+    # them — including it would force a false rewrite on label-format changes).
     if prev_payload:
-        if _items_payload_signature(items) == _items_payload_signature(prev_payload.get("items") or []) \
-           and (prev_payload.get("week") or {}) == payload["week"]:
+        prev_week = prev_payload.get("week") or {}
+        same_items = _items_payload_signature(items) == _items_payload_signature(prev_payload.get("items") or [])
+        same_window = (prev_week.get("start_date") == s and prev_week.get("end_date") == e)
+        if same_items and same_window:
             print("✅ No content changes vs previous publish — skipping write (workflow will skip commit too).")
             return
 
