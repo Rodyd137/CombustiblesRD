@@ -282,6 +282,71 @@ def parse_week_from_lines(lines):
     y = int(y); d1 = int(d1); d2 = int(d2)
     return (f"{y:04d}-{month:02d}-{d1:02d}", f"{y:04d}-{month:02d}-{d2:02d}")
 
+# Minimum number of fuel items we expect from a healthy run.
+# The MICM publication usually lists 8–10 products. If the OCR returns less
+# than this, we assume the parse degraded (bad PDF render, OCR confidence
+# dropped, etc.) and we DO NOT overwrite latest.json — we keep the previous
+# good snapshot live until the next run succeeds. This is M4 from Sprint 1.
+MIN_ITEMS_THRESHOLD = 5
+
+
+def _utc_now_iso() -> str:
+    """UTC timestamp string; uses timezone-aware API (utcnow() is deprecated in 3.12+)."""
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _load_previous_latest():
+    """Load the previously published latest.json, if any. Returns None on miss."""
+    path = os.path.join(OUT_DIR, "latest.json")
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def _compute_change(new_items, prev_payload):
+    """
+    M2 from Sprint 1.
+    For each item in `new_items`, attach a `change` dict comparing against the
+    previous week's price (looked up by `key`):
+        - {"type": "up", "amount_dop": +N.NN}
+        - {"type": "down", "amount_dop": -N.NN}
+        - {"type": "same", "amount_dop": 0.0}
+    Items the previous payload didn't have keep `change: null`.
+    Mutates `new_items` in place and returns it.
+    """
+    if not prev_payload:
+        return new_items
+    prev_by_key = {it.get("key"): it for it in (prev_payload.get("items") or [])}
+    for it in new_items:
+        prev = prev_by_key.get(it.get("key"))
+        if not prev or prev.get("price_dop") is None:
+            continue
+        try:
+            delta = round(float(it["price_dop"]) - float(prev["price_dop"]), 2)
+        except (TypeError, ValueError):
+            continue
+        if delta > 0:
+            it["change"] = {"type": "up", "amount_dop": delta}
+        elif delta < 0:
+            it["change"] = {"type": "down", "amount_dop": delta}
+        else:
+            it["change"] = {"type": "same", "amount_dop": 0.0}
+    return new_items
+
+
+def _items_payload_signature(items):
+    """Stable hash-friendly representation of items (ignoring `change` field).
+    Used to detect "real" change vs no-op runs that publish same prices."""
+    minimal = sorted(
+        [(it.get("key"), it.get("price_dop"), it.get("unit")) for it in items]
+    )
+    return json.dumps(minimal, ensure_ascii=False, sort_keys=True)
+
+
 def main():
     ensure_dirs()
     pdf_url, pdf_bytes = get_latest_pdf()
@@ -294,20 +359,46 @@ def main():
         # safety-net: intenta sobre TODAS las líneas
         items = build_items_from_lines(lines=lines)
 
+    # ---- M4: gate publish on a sanity-check item count ----
+    if len(items) < MIN_ITEMS_THRESHOLD:
+        prev = _load_previous_latest()
+        if prev:
+            # Keep the last known good snapshot live; just log and exit cleanly.
+            print(
+                f"⚠️  OCR returned only {len(items)} items (< {MIN_ITEMS_THRESHOLD} threshold). "
+                f"Keeping previous latest.json (published {prev.get('updated_at_utc')})."
+            )
+            return
+        print(
+            f"⚠️  OCR returned only {len(items)} items and no previous snapshot found. "
+            f"Will write the partial payload anyway as a cold-start."
+        )
+
     s, e = parse_week_from_lines(lines)
+
+    # ---- M2: compute per-item delta vs previous week ----
+    prev_payload = _load_previous_latest()
+    items = _compute_change(items, prev_payload)
 
     payload = {
         "source": pdf_url,
-        "updated_at_utc": datetime.datetime.utcnow().isoformat() + "Z",
+        "updated_at_utc": _utc_now_iso(),
         "week": {"start_date": s, "end_date": e},
         "currency": "DOP",
         "items": items
     }
 
+    # ---- M3: write only if the canonical content actually changed ----
+    if prev_payload:
+        if _items_payload_signature(items) == _items_payload_signature(prev_payload.get("items") or []) \
+           and (prev_payload.get("week") or {}) == payload["week"]:
+            print("✅ No content changes vs previous publish — skipping write (workflow will skip commit too).")
+            return
+
     with open(os.path.join(OUT_DIR, "latest.json"), "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
-    stamp = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
     with open(os.path.join(HIST_DIR, f"{stamp}.json"), "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 

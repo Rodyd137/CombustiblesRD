@@ -1,9 +1,17 @@
 name: Scrape & Publish
 
+# El MICM (Ministerio de Industria, Comercio y Mipymes) publica los precios
+# semanales de combustibles **los viernes** (sin hora exacta). Por eso
+# corremos:
+#   - Viernes (12-23 UTC, que es 8 AM - 7 PM RD) cada 15 minutos
+#   - Sábado madrugada (00-03 UTC, que es 8-11 PM RD del viernes) cada 15 min
+#   - Lun-Jue: una verificación diaria a la 1:00 UTC (9 PM RD del día previo)
+# Esto baja runs de ~336/sem a ~70/sem (-80%) sin perder cobertura del viernes.
 on:
   schedule:
-    - cron: "0 22 * * FRI"   # Viernes 6:00 PM RD
-    - cron: "*/30 * * * *"   # Redundancia
+    - cron: "*/15 12-23 * * FRI"
+    - cron: "*/15 0-3 * * SAT"
+    - cron: "0 1 * * MON,TUE,WED,THU"
   workflow_dispatch:
 
 permissions:
@@ -24,6 +32,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install deps
         run: |
@@ -31,6 +40,7 @@ jobs:
           pip install -r scraper/requirements.txt
 
       - name: Run scraper
+        id: scraper
         run: python scraper/scraper.py
 
       - name: Build trend (full)
@@ -39,32 +49,20 @@ jobs:
       - name: Build trend (min)
         run: python scraper/build_trend_min.py
 
-      - name: List files
-        run: |
-          echo "PWD:" && pwd
-          echo "ROOT:" && ls -la
-          echo "DATA:" && ls -la data || true
-          echo "HISTORY:" && ls -la data/history || true
-
       - name: Show latest.json preview
         run: |
           echo "---- latest.json (head) ----"
-          head -n 120 data/latest.json || true
-
-      - name: Show trend.json preview
-        run: |
-          echo "---- trend.json (head) ----"
-          head -n 80 data/trend.json || true
-
-      - name: Show trend_min.json preview
-        run: |
-          echo "---- trend_min.json (head) ----"
-          head -n 80 data/trend_min.json || true
+          head -n 60 data/latest.json || true
 
       - name: Commit & push data
         run: |
           git config user.name "gh-actions"
           git config user.email "actions@github.com"
           git add data
-          git commit -m "data: update $(date -u +'%Y-%m-%d %H:%M:%S')" || echo "Nothing new to commit"
-          git push || true
+          # Exit early without commit if nothing changed (saves noise).
+          if git diff --cached --quiet; then
+            echo "✅ No data changes — skipping commit."
+            exit 0
+          fi
+          git commit -m "data: update $(date -u +'%Y-%m-%d %H:%M:%S')"
+          git push
