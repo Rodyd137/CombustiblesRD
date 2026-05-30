@@ -378,6 +378,77 @@ def _safe_pair(y1, m1, d1, y2, m2, d2):
     return start.isoformat(), end.isoformat()
 
 
+# Spanish month abbreviations as they appear in MICM PDF filenames.
+SPANISH_MONTH_ABBR_3 = {
+    "ENE":1, "FEB":2, "MAR":3, "ABR":4, "MAY":5, "JUN":6,
+    "JUL":7, "AGO":8, "SEP":9, "SET":9, "OCT":10, "NOV":11, "DIC":12,
+}
+
+
+def parse_week_from_pdf_url(pdf_url: str):
+    """
+    M9: filename-fallback for week detection.
+    The MICM publishes PDFs whose URL embeds the week of validity, e.g.
+        AVISO-PRE.-SEM.CORTE-30-MAY-05-JUN-DE-2026-.pdf
+    The OCR sometimes misses the textual "del DD al DD de MES de YYYY" line
+    (slice region cuts it, or low confidence). The filename is far more
+    deterministic — we use it as a second-pass extractor.
+
+    Returns (start_iso, end_iso) or (None, None).
+    """
+    if not pdf_url:
+        return None, None
+    fn = pdf_url.rsplit("/", 1)[-1].rsplit(".", 1)[0].upper()
+
+    # Shape A: DD-MON-DD-MON-(DE-)?YYYY  ← most common 2025/2026
+    m = re.search(
+        r"(?<!\d)(\d{1,2})[-_.]+([A-Z]{3})[-_.]+(\d{1,2})[-_.]+([A-Z]{3})(?:[-_.]+DE)?[-_.]+(\d{4})",
+        fn,
+    )
+    if m:
+        d1, mo1, d2, mo2, y = m.groups()
+        m1 = SPANISH_MONTH_ABBR_3.get(mo1)
+        m2 = SPANISH_MONTH_ABBR_3.get(mo2)
+        if m1 and m2:
+            y = int(y); d1 = int(d1); d2 = int(d2)
+            # Cross-year handling: e.g. "30-DIC-05-ENE-DE-2026" probably means
+            # the start was Dec 30 of the previous year. MICM convention is
+            # usually to embed the END year, so start moves to (y-1).
+            if m1 == 12 and m2 == 1:
+                return _safe_pair(y - 1, m1, d1, y, m2, d2)
+            return _safe_pair(y, m1, d1, y, m2, d2)
+
+    # Shape B: DD-MM-YYYY-AL-DD-MM-YYYY (purely numeric range)
+    m = re.search(
+        r"(\d{1,2})[-_.](\d{1,2})[-_.](\d{4}).{0,8}?AL.{0,8}?(\d{1,2})[-_.](\d{1,2})[-_.](\d{4})",
+        fn,
+    )
+    if m:
+        d1, mo1, y1, d2, mo2, y2 = m.groups()
+        return _safe_pair(int(y1), int(mo1), int(d1), int(y2), int(mo2), int(d2))
+
+    # Shape C: long form with month names: "09-DE-AGOSTO-AL-15-DE-AGOSTO-2025"
+    LONG_MONTHS = {
+        "ENERO":1, "FEBRERO":2, "MARZO":3, "ABRIL":4, "MAYO":5, "JUNIO":6,
+        "JULIO":7, "AGOSTO":8, "SEPTIEMBRE":9, "SETIEMBRE":9,
+        "OCTUBRE":10, "NOVIEMBRE":11, "DICIEMBRE":12,
+    }
+    m = re.search(
+        r"(\d{1,2}).{0,5}?DE.{0,5}?([A-Z]+).{0,8}?AL.{0,5}?(\d{1,2}).{0,5}?DE.{0,5}?([A-Z]+).{0,8}?(\d{4})",
+        fn,
+    )
+    if m:
+        d1, mo1, d2, mo2, y = m.groups()
+        m1 = LONG_MONTHS.get(mo1)
+        m2 = LONG_MONTHS.get(mo2)
+        if m1 and m2:
+            y = int(y); d1 = int(d1); d2 = int(d2)
+            start_y = y - 1 if (m1 == 12 and m2 == 1) else y
+            return _safe_pair(start_y, m1, d1, y, m2, d2)
+
+    return None, None
+
+
 def build_week_label(start_iso, end_iso):
     """
     Human-friendly Spanish label for the week, e.g.:
@@ -494,6 +565,16 @@ def main():
         )
 
     s, e = parse_week_from_lines(lines)
+    # M9: filename fallback. The OCR sometimes misses the date line in the
+    # header (slice region or low confidence). The PDF URL itself embeds the
+    # week of validity and is far more deterministic.
+    if not (s and e):
+        fs, fe = parse_week_from_pdf_url(pdf_url)
+        if fs and fe:
+            print(f"ℹ️  week parsed from PDF filename fallback: {fs} → {fe}")
+            s, e = fs, fe
+        else:
+            print(f"⚠️  could not detect week from OCR nor from filename ({pdf_url})")
     week_label = build_week_label(s, e)   # M6: human-friendly "Vigente: 30 may – 5 jun 2026"
 
     # ---- M2: compute per-item delta vs previous week ----
