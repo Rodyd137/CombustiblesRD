@@ -55,6 +55,7 @@ jobs:
           head -n 60 data/latest.json || true
 
       - name: Commit & push data
+        id: commit
         run: |
           git config user.name "gh-actions"
           git config user.email "actions@github.com"
@@ -62,7 +63,19 @@ jobs:
           # Exit early without commit if nothing changed (saves noise).
           if git diff --cached --quiet; then
             echo "✅ No data changes — skipping commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "data: update $(date -u +'%Y-%m-%d %H:%M:%S')"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # M10: push a OneSignal notification when prices actually changed.
+      # Requires repo secrets ONESIGNAL_APP_ID + ONESIGNAL_REST_API_KEY.
+      # If either is unset, the script no-ops cleanly.
+      - name: Notify subscribers (OneSignal)
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
+          ONESIGNAL_REST_API_KEY: ${{ secrets.ONESIGNAL_REST_API_KEY }}
+        run: python scraper/notify_onesignal.py
