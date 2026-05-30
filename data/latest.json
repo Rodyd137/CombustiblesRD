@@ -1,10 +1,12 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2026/05/AVISO-PRE.-SEM.CORTE-30-MAY-05-JUN-DE-2026-.pdf",
-  "updated_at_utc": "2026-05-30T11:53:42.652278Z",
+  "updated_at_utc": "2026-05-30T12:17:32Z",
   "week": {
-    "start_date": null,
-    "end_date": null
+    "start_date": "2026-05-30",
+    "end_date": "2026-06-05",
+    "label": "Vigente: 30 may – 5 jun 2026"
   },
+  "week_label": "Vigente: 30 may – 5 jun 2026",
   "currency": "DOP",
   "items": [
     {
@@ -12,42 +14,60 @@
       "key": "gasolina_regular",
       "price_dop": 307.5,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Gasoil Regular",
       "key": "gasoil_regular",
       "price_dop": 259.8,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Gasoil Óptimo",
       "key": "gasoil_optimo",
       "price_dop": 287.1,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Avtur",
       "key": "avtur",
       "price_dop": 23.15,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
       "price_dop": 25.0,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Gas Licuado de Petróleo (GLP)",
       "key": "glp",
       "price_dop": 137.2,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     }
   ]
 }
