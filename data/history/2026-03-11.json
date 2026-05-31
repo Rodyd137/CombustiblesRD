@@ -36,20 +36,6 @@
       "change": null
     },
     {
-      "label": "Avtur",
-      "key": "avtur",
-      "price_dop": 29.38,
-      "unit": "galon",
-      "change": null
-    },
-    {
-      "label": "Kerosene",
-      "key": "kerosene",
-      "price_dop": 32.2,
-      "unit": "galon",
-      "change": null
-    },
-    {
       "label": "Gas Licuado de Petróleo (GLP)",
       "key": "glp",
       "price_dop": 137.2,

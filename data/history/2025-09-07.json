@@ -96,16 +96,6 @@
         "type": "same",
         "amount_dop": null
       }
-    },
-    {
-      "label": "Gas Natural",
-      "key": "gas_natural",
-      "price_dop": 43.97,
-      "unit": "m3",
-      "change": {
-        "type": "same",
-        "amount_dop": null
-      }
     }
   ]
 }
