@@ -405,6 +405,54 @@ def build_items_from_lines(lines):
             "unit": unit,
             "change": None
         })
+
+    # ------------------------------------------------------------------
+    # Positional fallback for Gasolina Premium
+    # ------------------------------------------------------------------
+    # On some MICM PDFs (observed week 2026-05-30 onward) Tesseract drops
+    # the "Gasolina Premium" label tokens entirely — the row arrives as a
+    # bare numeric line like "187.68 71.85 003 16.59 27.07 6.68 339.90
+    # (4.80) 335.10 4.00". When that happens the alias loop above never
+    # matches and Premium goes missing. The MICM convention is fixed:
+    # Premium is ALWAYS the first data row in the official region,
+    # immediately above Gasolina Regular. So if Premium didn't match and
+    # Regular did, take the most recent numeric-heavy line that sits
+    # ABOVE Regular and treat it as Premium.
+    if "gasolina_premium" not in seen_keys:
+        reg_idx = _find_label_index(region, LABEL_ALIASES["Gasolina Regular"])
+        if reg_idx is not None:
+            other_fuel_aliases = [
+                (label, alist)
+                for label, alist in LABEL_ALIASES.items()
+                if label != "Gasolina Premium"
+            ]
+            for i in range(reg_idx - 1, max(-1, reg_idx - 5), -1):
+                rec = region[i]
+                num_count = len(NUM_RE.findall(rec["text"]))
+                if num_count < 5:
+                    continue
+                tl = rec["text_l"]
+                if any(a in tl for label, alist in other_fuel_aliases for a in alist):
+                    continue
+                price = nearest_price_same_or_next_line(region, i)
+                if price is None:
+                    continue
+                lo, hi = PRICE_RANGE_DEFAULT
+                if not (lo <= price <= hi):
+                    continue
+                # Insert at position 0 to preserve FUEL_ORDER in output.
+                items.insert(0, {
+                    "label": "Gasolina Premium",
+                    "key": "gasolina_premium",
+                    "price_dop": round(price, 2),
+                    "unit": "galon",
+                    "change": None,
+                })
+                seen_keys.add("gasolina_premium")
+                if os.environ.get("SCRAPER_DEBUG_REGION"):
+                    print(f"DEBUG: PREMIUM_FALLBACK recovered from region[{i}] price={price}")
+                break
+
     return items
 
 # --- Detección de la semana de vigencia ---
