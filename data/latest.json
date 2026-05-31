@@ -1,6 +1,6 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2026/05/AVISO-PRE.-SEM.CORTE-30-MAY-05-JUN-DE-2026-.pdf",
-  "updated_at_utc": "2026-05-31T13:14:51Z",
+  "updated_at_utc": "2026-05-31T15:04:44Z",
   "week": {
     "start_date": "2026-05-30",
     "end_date": "2026-06-05",
@@ -14,7 +14,10 @@
       "key": "gasolina_premium",
       "price_dop": 335.1,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "up",
+        "amount_dop": 4.0
+      }
     },
     {
       "label": "Gasolina Regular",
@@ -22,8 +25,8 @@
       "price_dop": 307.5,
       "unit": "galon",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "up",
+        "amount_dop": 2.0
       }
     },
     {
@@ -32,8 +35,8 @@
       "price_dop": 259.8,
       "unit": "galon",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "up",
+        "amount_dop": 2.0
       }
     },
     {
@@ -42,8 +45,8 @@
       "price_dop": 287.1,
       "unit": "galon",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "up",
+        "amount_dop": 4.0
       }
     },
     {
@@ -52,8 +55,8 @@
       "price_dop": 277.02,
       "unit": "galon",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "down",
+        "amount_dop": -23.15
       }
     },
     {
@@ -62,8 +65,8 @@
       "price_dop": 314.7,
       "unit": "galon",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "down",
+        "amount_dop": -25.0
       }
     },
     {
@@ -72,8 +75,8 @@
       "price_dop": 194.06,
       "unit": "galon",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "down",
+        "amount_dop": -9.77
       }
     },
     {
