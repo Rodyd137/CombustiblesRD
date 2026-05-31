@@ -323,6 +323,33 @@ def norm_key(label: str) -> str:
             return norm
     return re.sub(r"[^a-z0-9]+", "_", k)
 
+def _find_label_index(haystack, aliases):
+    """Locate the first OCR line that contains any alias.
+
+    Two passes:
+      1. Single-line substring match (fast path, handles 95% of cases).
+      2. Cross-line concatenation: glue each line with the NEXT one and
+         retry. This catches OCR fragmentations where the table label
+         straddles two text lines (e.g. "Gasolina" on row N and
+         "Premium 187.68 ..." on row N+1). When the alias matches across
+         a pair, we return the line carrying the NUMBERS (typically the
+         second), since that's what the price picker needs.
+    """
+    for i, rec in enumerate(haystack):
+        if any(a in rec["text_l"] for a in aliases):
+            return i
+
+    for i in range(len(haystack) - 1):
+        joined = haystack[i]["text_l"] + " " + haystack[i + 1]["text_l"]
+        if any(a in joined for a in aliases):
+            # Prefer whichever line has more digits — that's the data row.
+            a_digits = sum(c.isdigit() for c in haystack[i]["text"])
+            b_digits = sum(c.isdigit() for c in haystack[i + 1]["text"])
+            return i + 1 if b_digits >= a_digits else i
+
+    return None
+
+
 def build_items_from_lines(lines):
     region = slice_official_region(lines)
     items = []
@@ -336,25 +363,34 @@ def build_items_from_lines(lines):
         "Cilindro 100 lb", "Cilindro 50 lb", "Cilindro 25 lb", "Cilindro 15 lb",
     }
 
+    # DEBUG: dump the first N lines of the region so we can diagnose label
+    # detection issues on the GitHub Actions runner (where the OCR may
+    # group rows differently than locally). Remove once stable.
+    if os.environ.get("SCRAPER_DEBUG_REGION"):
+        print(f"DEBUG: region size = {len(region)}")
+        for i, rec in enumerate(region[:30]):
+            print(f"DEBUG: region[{i:2d}] y={rec['y']:.0f} text={rec['text'][:140]!r}")
+
     for canonical_label in FUEL_ORDER:
         aliases = LABEL_ALIASES[canonical_label]
         haystack = lines if canonical_label in cylinder_labels else region
 
-        cand_idx = None
-        for i, rec in enumerate(haystack):
-            tl = rec["text_l"]
-            if any(alias in tl for alias in aliases):
-                cand_idx = i
-                break
+        cand_idx = _find_label_index(haystack, aliases)
         if cand_idx is None:
+            if os.environ.get("SCRAPER_DEBUG_REGION"):
+                print(f"DEBUG: MISS  {canonical_label!r}  aliases={aliases}")
             continue
 
         price = nearest_price_same_or_next_line(haystack, cand_idx)
         if price is None:
+            if os.environ.get("SCRAPER_DEBUG_REGION"):
+                print(f"DEBUG: NO_PRICE {canonical_label!r} matched_line={haystack[cand_idx]['text'][:120]!r}")
             continue
 
         lo, hi = PRICE_RANGES.get(canonical_label, PRICE_RANGE_DEFAULT)
         if not (lo <= price <= hi):
+            if os.environ.get("SCRAPER_DEBUG_REGION"):
+                print(f"DEBUG: OUT_OF_RANGE {canonical_label!r} price={price} range=[{lo},{hi}] line={haystack[cand_idx]['text'][:120]!r}")
             continue
 
         unit = UNIT_OVERRIDES.get(canonical_label, "galon")
