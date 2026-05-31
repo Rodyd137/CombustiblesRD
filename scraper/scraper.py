@@ -787,10 +787,20 @@ def _compute_change(new_items, prev_payload):
 
 
 def _items_payload_signature(items):
-    """Stable hash-friendly representation of items (ignoring `change` field).
-    Used to detect "real" change vs no-op runs that publish same prices."""
+    """Stable hash-friendly representation of items.
+
+    Includes `change` because the M3 dedup gate uses this signature to
+    decide whether to re-publish latest.json. We want a re-publish when
+    the per-item variation flips (e.g. the OCR now extracts up/down/same
+    straight from the PDF where before it always read "same" from a
+    file-diff against a stale snapshot) even if the numeric prices
+    didn't move.
+    """
+    def _ch(it):
+        c = it.get("change") or {}
+        return (c.get("type"), c.get("amount_dop"))
     minimal = sorted(
-        [(it.get("key"), it.get("price_dop"), it.get("unit")) for it in items]
+        [(it.get("key"), it.get("price_dop"), it.get("unit"), _ch(it)) for it in items]
     )
     return json.dumps(minimal, ensure_ascii=False, sort_keys=True)
 
