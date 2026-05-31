@@ -26,12 +26,18 @@ FUEL_KEYS = {
     "kerosene":         "kerosene",
     "fueloil #6":       "fueloil_6",
     "fuel oil #6":      "fueloil_6",
+    "fuel oil":         "fueloil_6",
+    "fueloil":          "fueloil_6",
     "fueloil 1%s":      "fueloil_1s",
     "fuel oil 1%s":     "fueloil_1s",
     "gas licuado de petróleo (glp)": "glp",
     "gas licuado de petroleo (glp)": "glp",
     "glp":              "glp",
     "gas natural":      "gas_natural",
+    "cilindros de 100 libras": "cilindro_100lb",
+    "cilindros de 50 libras":  "cilindro_50lb",
+    "cilindros de 25 libras":  "cilindro_25lb",
+    "cilindros de 15 libras":  "cilindro_15lb",
 }
 
 # Aliases que buscamos por línea (minúsculas)
@@ -42,15 +48,27 @@ LABEL_ALIASES = {
     "Gasoil Óptimo":     ["gasoil óptimo", "gasoil optimo", "diesel optimo", "diésel óptimo", "diesel óptimo"],
     "Avtur":             ["avtur"],
     "Kerosene":          ["kerosene", "queroseno", "kerosén"],
-    "Fueloil #6":        ["fueloil #6", "fuel oil #6", "fuel oil # 6", "fuel-oil #6"],
-    "Fueloil 1%S":       ["fueloil 1%s", "fuel oil 1%s", "fuel oil 1 %s", "fueloil 1 %s"],
+    # MICM publishes the regular FO row as just "Fuel Oil" (no #6 suffix).
+    # Keep both — the longer aliases match first so we don't accidentally
+    # capture FO 1% Azufre into this bucket.
+    "Fueloil #6":        ["fueloil #6", "fuel oil #6", "fuel oil # 6", "fuel-oil #6", "fuel oil"],
+    "Fueloil 1%S":       ["fueloil 1%s", "fuel oil 1%s", "fuel oil 1 %s", "fueloil 1 %s",
+                          "fuel oil 1% azufre", "fuel oil 1 % azufre", "fueloil 1% azufre"],
     "Gas Licuado de Petróleo (GLP)": ["gas licuado de petróleo (glp)", "gas licuado de petroleo (glp)", "glp"],
     "Gas Natural":       ["gas natural"],
+    # GLP retail cylinders ("envasadoras") — published as a separate block in
+    # the same PDF. Households buy GLP this way, so the prices are useful.
+    "Cilindro 100 lb":   ["cilindros de 100 libras", "cilindro de 100 libras"],
+    "Cilindro 50 lb":    ["cilindros de 50 libras",  "cilindro de 50 libras"],
+    "Cilindro 25 lb":    ["cilindros de 25 libras",  "cilindro de 25 libras"],
+    "Cilindro 15 lb":    ["cilindros de 15 libras",  "cilindro de 15 libras"],
 }
 # Orden de salida
 FUEL_ORDER = [
     "Gasolina Premium","Gasolina Regular","Gasoil Regular","Gasoil Óptimo",
-    "Avtur","Kerosene","Fueloil #6","Fueloil 1%S","Gas Licuado de Petróleo (GLP)","Gas Natural"
+    "Avtur","Kerosene","Fueloil #6","Fueloil 1%S",
+    "Gas Licuado de Petróleo (GLP)","Gas Natural",
+    "Cilindro 100 lb","Cilindro 50 lb","Cilindro 25 lb","Cilindro 15 lb",
 ]
 
 STOP_MARKERS = [
@@ -58,8 +76,33 @@ STOP_MARKERS = [
     "estructura de precios", "precio paridad",
 ]
 
-# n con 2–4 dígitos enteros y dos decimales (ej. 290.10, 154,90, 43.97)
-NUM_RE = re.compile(r"(?<!\d)(\d{2,4}[.,]\d{2})(?!\d)")
+# Number with 2 decimals. Accepts thousand-separated form ("3,429.95") for
+# cylinder prices AND the bare form for fuel prices ("307.50"). Matches must
+# stand on a non-digit boundary.
+NUM_RE = re.compile(
+    r"(?<!\d)(\d{1,3}(?:,\d{3})+\.\d{2}|\d{2,5}[.,]\d{2})(?!\d)"
+)
+
+# Plausible price range per canonical fuel label. Cylinders live in a much
+# higher band than liquid fuels (per-gallon). Liquid fuels default to
+# 50–500 DOP/gal which excludes the variation-column noise (typically
+# under 30) that was getting picked up for Avtur/Kerosene/Premium.
+PRICE_RANGE_DEFAULT = (50.0, 500.0)
+PRICE_RANGES = {
+    "Cilindro 100 lb": (2000.0, 6000.0),
+    "Cilindro 50 lb":  (1000.0, 3000.0),
+    "Cilindro 25 lb":  (400.0,  1500.0),
+    "Cilindro 15 lb":  (250.0,  900.0),
+}
+
+# Unit override per canonical fuel label.
+UNIT_OVERRIDES = {
+    "Gas Natural":     "m3",
+    "Cilindro 100 lb": "cilindro",
+    "Cilindro 50 lb":  "cilindro",
+    "Cilindro 25 lb":  "cilindro",
+    "Cilindro 15 lb":  "cilindro",
+}
 
 def ensure_dirs():
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -184,22 +227,76 @@ def slice_official_region(lines):
             break
     return lines[start_idx: end_idx] if end_idx else lines[start_idx:]
 
+def _parse_number(token: str) -> float | None:
+    """Parse a single OCR token to float, handling 'RD$1,234.56' style."""
+    val = token.replace(",", "")  # strip thousand separators
+    # The dot in '1234.56' is the decimal point, so just float() works.
+    try:
+        return float(val)
+    except ValueError:
+        # OCR sometimes substitutes "1234,56" (comma decimal). Retry.
+        try:
+            return float(token.replace(",", "."))
+        except ValueError:
+            return None
+
+
 def parse_price_from_line_words(line_rec):
-    """Número con dos decimales más a la derecha en esa línea."""
-    nums = []
-    for w,left,top,right,bottom in line_rec["words"]:
-        m = NUM_RE.fullmatch(w) or re.search(NUM_RE, w)
-        if m:
-            val = m.group(1).replace(",", ".")
-            try:
-                price = float(val)
-                nums.append((price, right))
-            except:
-                pass
-    if not nums:
+    """
+    Pick the most likely "consumer price" from an OCR'd table row.
+
+    The MICM aviso has this column order per fuel row:
+
+        TIPO | PARIDAD | LEY 112-00 | LEY 495-06 | DIST | DETAL | TRANSP
+             | PRECIO_OFICIAL | AJUSTE | PRECIO_PUBLICO | VARIACION
+
+    The previous picker took the rightmost numeric token. That breaks for
+    Avtur / Kerosene / Premium because the VARIACION column (rightmost
+    column for the rows in this aviso) holds a small positive or negative
+    number like (4.80), (23.15), 4.00 — wrapped in parens for decreases.
+
+    Heuristic, in order:
+      1. Reject any number whose OCR token includes '(' or ')'
+         (variation column always appears parens-wrapped, even when the
+         delta is positive in some weeks).
+      2. Among remaining numbers, prefer the rightmost one in the
+         typical fuel price range (≥ 100 DOP). This corresponds to the
+         PRECIO_PUBLICO column when OCR groups it onto the row, or
+         PRECIO_OFICIAL otherwise — both are sensible answers.
+      3. If nothing ≥ 100 survives, fall back to the rightmost ≥ 50
+         (covers GLP at ~137 and any future low-priced fuel).
+      4. Last resort: rightmost any number (legacy behavior).
+    """
+    candidates = []
+    for w, left, top, right, bottom in line_rec["words"]:
+        in_parens = "(" in w or ")" in w
+        for m in NUM_RE.finditer(w):
+            tok = m.group(1)
+            price = _parse_number(tok)
+            if price is None:
+                continue
+            candidates.append((price, right, in_parens))
+
+    if not candidates:
         return None
-    nums.sort(key=lambda t: t[1])
-    return nums[-1][0]
+
+    free = [c for c in candidates if not c[2]]
+
+    # Step 2 — rightmost in typical fuel band
+    typical = [c for c in free if c[0] >= 100.0]
+    if typical:
+        typical.sort(key=lambda t: t[1])
+        return typical[-1][0]
+
+    # Step 3 — rightmost in extended sane band
+    sane = [c for c in free if c[0] >= 50.0]
+    if sane:
+        sane.sort(key=lambda t: t[1])
+        return sane[-1][0]
+
+    # Step 4 — fallback: rightmost anything (paren or not)
+    candidates.sort(key=lambda t: t[1])
+    return candidates[-1][0]
 
 def nearest_price_same_or_next_line(lines, idx):
     p = parse_price_from_line_words(lines[idx])
@@ -231,10 +328,20 @@ def build_items_from_lines(lines):
     items = []
     seen_keys = set()
 
+    # For cylinder rows the MICM publishes them BELOW "Precio de Venta del
+    # GLP al Público en las Envasadoras", which falls outside the
+    # `slice_official_region` window (we cut at the stop markers above).
+    # Search the full `lines` for cylinder labels so we catch them too.
+    cylinder_labels = {
+        "Cilindro 100 lb", "Cilindro 50 lb", "Cilindro 25 lb", "Cilindro 15 lb",
+    }
+
     for canonical_label in FUEL_ORDER:
         aliases = LABEL_ALIASES[canonical_label]
+        haystack = lines if canonical_label in cylinder_labels else region
+
         cand_idx = None
-        for i, rec in enumerate(region):
+        for i, rec in enumerate(haystack):
             tl = rec["text_l"]
             if any(alias in tl for alias in aliases):
                 cand_idx = i
@@ -242,15 +349,15 @@ def build_items_from_lines(lines):
         if cand_idx is None:
             continue
 
-        price = nearest_price_same_or_next_line(region, cand_idx)
+        price = nearest_price_same_or_next_line(haystack, cand_idx)
         if price is None:
             continue
 
-        # filtro rango razonable
-        if not (20.0 <= price <= 500.0):
+        lo, hi = PRICE_RANGES.get(canonical_label, PRICE_RANGE_DEFAULT)
+        if not (lo <= price <= hi):
             continue
 
-        unit = "m3" if canonical_label.lower().startswith("gas natural") else "galon"
+        unit = UNIT_OVERRIDES.get(canonical_label, "galon")
         key = norm_key(canonical_label)
         if key in seen_keys:
             continue
