@@ -1,6 +1,6 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2026/05/AVISO-PRE.-SEM.CORTE-30-MAY-05-JUN-DE-2026-.pdf",
-  "updated_at_utc": "2026-05-31T13:02:26Z",
+  "updated_at_utc": "2026-05-31T13:14:51Z",
   "week": {
     "start_date": "2026-05-30",
     "end_date": "2026-06-05",
@@ -9,6 +9,13 @@
   "week_label": "Vigente: 30 may – 5 jun 2026",
   "currency": "DOP",
   "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 335.1,
+      "unit": "galon",
+      "change": null
+    },
     {
       "label": "Gasolina Regular",
       "key": "gasolina_regular",
@@ -45,8 +52,8 @@
       "price_dop": 277.02,
       "unit": "galon",
       "change": {
-        "type": "up",
-        "amount_dop": 253.87
+        "type": "same",
+        "amount_dop": 0.0
       }
     },
     {
@@ -55,8 +62,8 @@
       "price_dop": 314.7,
       "unit": "galon",
       "change": {
-        "type": "up",
-        "amount_dop": 289.7
+        "type": "same",
+        "amount_dop": 0.0
       }
     },
     {
@@ -64,7 +71,10 @@
       "key": "fueloil_6",
       "price_dop": 194.06,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Gas Licuado de Petróleo (GLP)",
@@ -81,28 +91,40 @@
       "key": "cilindro_100_lb",
       "price_dop": 3429.95,
       "unit": "cilindro",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Cilindro 50 lb",
       "key": "cilindro_50_lb",
       "price_dop": 1714.98,
       "unit": "cilindro",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Cilindro 25 lb",
       "key": "cilindro_25_lb",
       "price_dop": 857.49,
       "unit": "cilindro",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Cilindro 15 lb",
       "key": "cilindro_15_lb",
       "price_dop": 514.49,
       "unit": "cilindro",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     }
   ]
 }

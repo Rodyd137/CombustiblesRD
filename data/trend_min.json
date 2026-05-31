@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-05-31T13:12:57.467828Z",
+  "updated_at_utc": "2026-05-31T13:14:52.027255Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -382,6 +382,10 @@
       {
         "date": "2026-05-28",
         "price_dop": 331
+      },
+      {
+        "date": "2026-06-05",
+        "price_dop": 335
       }
     ],
     "gasolina_regular": [
