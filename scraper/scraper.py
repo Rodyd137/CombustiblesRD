@@ -298,6 +298,49 @@ def parse_price_from_line_words(line_rec):
     candidates.sort(key=lambda t: t[1])
     return candidates[-1][0]
 
+def parse_variation_from_line(line_rec):
+    """
+    Read the weekly variation from the rightmost column of a fuel row.
+
+    MICM convention on the aviso PDF:
+      * The LAST numeric token on a fuel row is the variation (AUM/DISM).
+      * Plain number → price went UP that amount.
+      * Number in parentheses → price went DOWN that amount.
+      * `0.00` → unchanged.
+
+    Examples (rightmost tokens):
+      "... 335.10 4.00"     → up 4.00     (Premium subió RD$4.00)
+      "... 277.02 (23.15)"  → down -23.15 (Avtur bajó RD$23.15)
+      "... 137.20 0.00"     → same 0.0
+
+    Returns the same `{type, amount_dop}` dict shape that `_compute_change`
+    produces, or None when we can't confidently parse the tail (so the
+    caller can fall back to the file-diff path).
+    """
+    text = (line_rec.get("text") or "").strip()
+    if not text:
+        return None
+    tokens = text.split()
+    if not tokens:
+        return None
+    tail = tokens[-1]
+    is_negative = tail.startswith("(") or tail.endswith(")")
+    cleaned = tail.strip("()").strip(",.;")
+    if not re.fullmatch(r"-?\d+[.,]\d{2}", cleaned):
+        return None
+    try:
+        amount = float(cleaned.replace(",", "."))
+    except ValueError:
+        return None
+    if is_negative:
+        amount = -abs(amount)
+    if amount > 0:
+        return {"type": "up", "amount_dop": round(amount, 2)}
+    if amount < 0:
+        return {"type": "down", "amount_dop": round(amount, 2)}
+    return {"type": "same", "amount_dop": 0.0}
+
+
 def nearest_price_same_or_next_line(lines, idx):
     p = parse_price_from_line_words(lines[idx])
     if p is not None:
@@ -398,12 +441,22 @@ def build_items_from_lines(lines):
         if key in seen_keys:
             continue
         seen_keys.add(key)
+
+        # Pull the week-over-week change straight from the row's VARIACION
+        # column. We only do this for liquid-fuel rows that have the full
+        # column structure — cylinders publish only a single retail price,
+        # no variation column, so they fall back to file-diff in
+        # `_compute_change`.
+        change = None
+        if canonical_label not in cylinder_labels:
+            change = parse_variation_from_line(haystack[cand_idx])
+
         items.append({
             "label": canonical_label,
             "key": key,
             "price_dop": round(price, 2),
             "unit": unit,
-            "change": None
+            "change": change,
         })
 
     # ------------------------------------------------------------------
@@ -446,7 +499,7 @@ def build_items_from_lines(lines):
                     "key": "gasolina_premium",
                     "price_dop": round(price, 2),
                     "unit": "galon",
-                    "change": None,
+                    "change": parse_variation_from_line(rec),
                 })
                 seen_keys.add("gasolina_premium")
                 if os.environ.get("SCRAPER_DEBUG_REGION"):
@@ -691,18 +744,32 @@ def _load_previous_latest():
 def _compute_change(new_items, prev_payload):
     """
     M2 from Sprint 1.
-    For each item in `new_items`, attach a `change` dict comparing against the
-    previous week's price (looked up by `key`):
-        - {"type": "up", "amount_dop": +N.NN}
+
+    For each item in `new_items` that doesn't ALREADY have a `change` set
+    (the row-level OCR extractor wins when available — it reads the actual
+    VARIACION column off the MICM PDF), attach a `change` dict comparing
+    against the previous week's price (looked up by `key`):
+        - {"type": "up",   "amount_dop": +N.NN}
         - {"type": "down", "amount_dop": -N.NN}
         - {"type": "same", "amount_dop": 0.0}
-    Items the previous payload didn't have keep `change: null`.
+
+    Items the previous payload didn't have AND that the OCR didn't produce
+    a change for keep `change: null`.
+
+    The file-diff path is intentionally a fallback: if a week's run silently
+    re-publishes the same broken price (as happened during the
+    Avtur/Kerosene/Premium parser bug), the diff would report "same" even
+    though MICM's own PDF says "DOWN 23.15". Trusting the PDF column avoids
+    that whole class of bug.
+
     Mutates `new_items` in place and returns it.
     """
     if not prev_payload:
         return new_items
     prev_by_key = {it.get("key"): it for it in (prev_payload.get("items") or [])}
     for it in new_items:
+        if it.get("change") is not None:
+            continue
         prev = prev_by_key.get(it.get("key"))
         if not prev or prev.get("price_dop") is None:
             continue
