@@ -1,5 +1,5 @@
 {
-  "updated_at_utc": "2026-06-26T18:10:52.981366Z",
+  "updated_at_utc": "2026-06-26T20:08:06.017942Z",
   "currency": "DOP",
   "series": {
     "gasolina_premium": [
@@ -2092,6 +2092,12 @@
         "price_dop": 310.5,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 310.5,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "gasoil_regular": [
@@ -3591,6 +3597,12 @@
       },
       {
         "date": "2026-06-19",
+        "price_dop": 262.8,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
         "price_dop": 262.8,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -5096,6 +5108,12 @@
         "price_dop": 293.1,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 293.1,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "avtur": [
@@ -6208,6 +6226,12 @@
         "price_dop": 244.47,
         "delta_abs": -22.53,
         "delta_pct": -8.4382
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 231.78,
+        "delta_abs": -12.69,
+        "delta_pct": -5.1908
       }
     ],
     "kerosene": [
@@ -7320,6 +7344,12 @@
         "price_dop": 279.8,
         "delta_abs": -23.4,
         "delta_pct": -7.7177
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 265.9,
+        "delta_abs": -13.9,
+        "delta_pct": -4.9678
       }
     ],
     "fueloil_6": [
@@ -7382,6 +7412,12 @@
         "price_dop": 168.96,
         "delta_abs": -17.19,
         "delta_pct": -9.2345
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 156.86,
+        "delta_abs": -12.1,
+        "delta_pct": -7.1615
       }
     ],
     "fueloil_1s": [
@@ -8964,6 +9000,12 @@
         "price_dop": 137.2,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 137.2,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "cilindro_100_lb": [
@@ -8987,6 +9029,12 @@
       },
       {
         "date": "2026-06-19",
+        "price_dop": 3429.95,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
         "price_dop": 3429.95,
         "delta_abs": 0.0,
         "delta_pct": 0.0
@@ -9016,6 +9064,12 @@
         "price_dop": 1714.98,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 1714.98,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "cilindro_25_lb": [
@@ -9042,6 +9096,12 @@
         "price_dop": 857.49,
         "delta_abs": 0.0,
         "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
+        "price_dop": 857.49,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
       }
     ],
     "cilindro_15_lb": [
@@ -9065,6 +9125,12 @@
       },
       {
         "date": "2026-06-19",
+        "price_dop": 514.49,
+        "delta_abs": 0.0,
+        "delta_pct": 0.0
+      },
+      {
+        "date": "2026-07-03",
         "price_dop": 514.49,
         "delta_abs": 0.0,
         "delta_pct": 0.0
