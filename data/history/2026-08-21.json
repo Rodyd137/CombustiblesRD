@@ -1,6 +1,6 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2026/08/AVISO-PRE.-SEM.CORTE-22-28-AGO-DE-2026-ESCENARIO-2.pdf",
-  "updated_at_utc": "2026-08-21T20:48:06Z",
+  "updated_at_utc": "2026-08-21T21:18:24Z",
   "week": {
     "start_date": null,
     "end_date": null,
@@ -55,8 +55,8 @@
       "price_dop": 341.1,
       "unit": "galon",
       "change": {
-        "type": "up",
-        "amount_dop": 54.64
+        "type": "same",
+        "amount_dop": 0.0
       }
     },
     {
