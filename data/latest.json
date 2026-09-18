@@ -1,6 +1,6 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2026/09/AVISO-PRE.-SEM.CORTE-19-25-SEP-DE-2026.pdf",
-  "updated_at_utc": "2026-09-18T21:15:30Z",
+  "updated_at_utc": "2026-09-18T23:20:26Z",
   "week": {
     "start_date": null,
     "end_date": null,
@@ -44,7 +44,10 @@
       "key": "avtur",
       "price_dop": 350.1,
       "unit": "galon",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Kerosene",
