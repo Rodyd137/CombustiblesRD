@@ -1,6 +1,6 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-17-23-OCT-DE-2026.pdf",
-  "updated_at_utc": "2026-10-16T22:09:18Z",
+  "updated_at_utc": "2026-10-17T00:27:31Z",
   "week": {
     "start_date": null,
     "end_date": null,
@@ -94,7 +94,10 @@
       "key": "cilindro_100_lb",
       "price_dop": 3380.07,
       "unit": "cilindro",
-      "change": null
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
     },
     {
       "label": "Cilindro 50 lb",
