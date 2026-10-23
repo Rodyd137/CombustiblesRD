@@ -1,0 +1,133 @@
+{
+  "source": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-24-30-OCT-DE-2026.pdf",
+  "updated_at_utc": "2026-10-23T23:04:38Z",
+  "week": {
+    "start_date": null,
+    "end_date": null,
+    "label": null
+  },
+  "week_label": null,
+  "currency": "DOP",
+  "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 358.1,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Gasolina Regular",
+      "key": "gasolina_regular",
+      "price_dop": 317.5,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Gasoil Regular",
+      "key": "gasoil_regular",
+      "price_dop": 270.8,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 318.1,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Avtur",
+      "key": "avtur",
+      "price_dop": 358.66,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 6.18
+      }
+    },
+    {
+      "label": "Kerosene",
+      "key": "kerosene",
+      "price_dop": 402.7,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 6.9
+      }
+    },
+    {
+      "label": "Fueloil #6",
+      "key": "fueloil_6",
+      "price_dop": 195.87,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 3.79
+      }
+    },
+    {
+      "label": "Gas Licuado de Petróleo (GLP)",
+      "key": "glp",
+      "price_dop": 135.2,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Cilindro 100 lb",
+      "key": "cilindro_100_lb",
+      "price_dop": 3380.07,
+      "unit": "cilindro",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Cilindro 50 lb",
+      "key": "cilindro_50_lb",
+      "price_dop": 1690.04,
+      "unit": "cilindro",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Cilindro 25 lb",
+      "key": "cilindro_25_lb",
+      "price_dop": 845.02,
+      "unit": "cilindro",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Cilindro 15 lb",
+      "key": "cilindro_15_lb",
+      "price_dop": 507.01,
+      "unit": "cilindro",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    }
+  ]
+}

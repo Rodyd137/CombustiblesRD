@@ -1,6 +1,6 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-17-23-OCT-DE-2026.pdf",
-  "updated_at_utc": "2026-10-17T00:27:31Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-24-30-OCT-DE-2026.pdf",
+  "updated_at_utc": "2026-10-23T23:04:38Z",
   "week": {
     "start_date": null,
     "end_date": null,
@@ -52,31 +52,31 @@
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 352.48,
+      "price_dop": 358.66,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 7.89
+        "amount_dop": 6.18
       }
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 395.8,
+      "price_dop": 402.7,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 8.6
+        "amount_dop": 6.9
       }
     },
     {
       "label": "Fueloil #6",
       "key": "fueloil_6",
-      "price_dop": 192.08,
+      "price_dop": 195.87,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 9.06
+        "amount_dop": 3.79
       }
     },
     {
