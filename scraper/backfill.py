@@ -44,6 +44,8 @@ def bajar_historico():
     try:
         r = requests.get(HISTORICO, timeout=40)
         print(f"{r.status_code} {HISTORICO}")
+        with open(os.path.join(destino, "pagina.html"), "w", encoding="utf-8") as f:
+            f.write(r.text)
         sopa = BeautifulSoup(r.text, "lxml")
         docs = sorted({urljoin(HISTORICO, a["href"]) for a in sopa.select("a[href]")
                        if re.search(r"\.(xlsx?|csv|pdf|zip)$", a["href"], re.I)})
