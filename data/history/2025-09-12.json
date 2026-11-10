@@ -1,10 +1,16 @@
 {
-  "source": "https://www.conectate.com.do/articulo/precio-combustible-republica-dominicana/",
-  "updated_at_utc": "2025-09-12T23:38:47.726801Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2025/09/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-13-19-DE-SEP.-DE-2025-.pdf",
+  "updated_at_utc": null,
   "week": {
     "start_date": null,
-    "end_date": "2025-05-12"
+    "end_date": null,
+    "label": null
   },
+  "vigencia": {
+    "desde": "2025-09-13",
+    "hasta": "2025-09-19"
+  },
+  "week_label": null,
   "currency": "DOP",
   "items": [
     {
@@ -14,7 +20,7 @@
       "unit": "galon",
       "change": {
         "type": "same",
-        "amount_dop": null
+        "amount_dop": 0.0
       }
     },
     {
@@ -24,7 +30,7 @@
       "unit": "galon",
       "change": {
         "type": "same",
-        "amount_dop": null
+        "amount_dop": 0.0
       }
     },
     {
@@ -34,7 +40,7 @@
       "unit": "galon",
       "change": {
         "type": "same",
-        "amount_dop": null
+        "amount_dop": 0.0
       }
     },
     {
@@ -44,47 +50,37 @@
       "unit": "galon",
       "change": {
         "type": "same",
-        "amount_dop": null
+        "amount_dop": 0.0
       }
     },
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 194.06,
+      "price_dop": 198.8,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 6.85
+        "amount_dop": 2.63
       }
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 225.4,
+      "price_dop": 229.8,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 7.5
+        "amount_dop": 2.1
       }
     },
     {
       "label": "Fueloil #6",
       "key": "fueloil_6",
-      "price_dop": 154.9,
+      "price_dop": 156.54,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 4.36
-      }
-    },
-    {
-      "label": "Fueloil 1%S",
-      "key": "fueloil_1s",
-      "price_dop": 171.0,
-      "unit": "galon",
-      "change": {
-        "type": "up",
-        "amount_dop": 5.53
+        "amount_dop": 0.18
       }
     },
     {
@@ -94,8 +90,37 @@
       "unit": "galon",
       "change": {
         "type": "same",
-        "amount_dop": null
+        "amount_dop": 0.0
       }
+    },
+    {
+      "label": "Cilindro 100 lb",
+      "key": "cilindro_100_lb",
+      "price_dop": 3429.95,
+      "unit": "cilindro",
+      "change": null
+    },
+    {
+      "label": "Cilindro 50 lb",
+      "key": "cilindro_50_lb",
+      "price_dop": 1714.98,
+      "unit": "cilindro",
+      "change": null
+    },
+    {
+      "label": "Cilindro 25 lb",
+      "key": "cilindro_25_lb",
+      "price_dop": 857.49,
+      "unit": "cilindro",
+      "change": null
+    },
+    {
+      "label": "Cilindro 15 lb",
+      "key": "cilindro_15_lb",
+      "price_dop": 514.49,
+      "unit": "cilindro",
+      "change": null
     }
-  ]
+  ],
+  "origen": "backfill-circular"
 }

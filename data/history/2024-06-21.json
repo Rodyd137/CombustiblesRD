@@ -1,0 +1,67 @@
+{
+  "source": "https://api.digital.gob.do/v1/fuels?date=2024-06-22",
+  "updated_at_utc": null,
+  "week": {
+    "start_date": null,
+    "end_date": null,
+    "label": null
+  },
+  "vigencia": {
+    "desde": "2024-06-22",
+    "hasta": "2024-06-28"
+  },
+  "week_label": null,
+  "currency": "DOP",
+  "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 290.1,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasolina Regular",
+      "key": "gasolina_regular",
+      "price_dop": 272.5,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Regular",
+      "key": "gasoil_regular",
+      "price_dop": 221.6,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 239.1,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Avtur",
+      "key": "avtur",
+      "price_dop": 203.31,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Kerosene",
+      "key": "kerosene",
+      "price_dop": 233.64,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gas Licuado de Petróleo (GLP)",
+      "key": "glp",
+      "price_dop": 132.6,
+      "unit": "galon",
+      "change": null
+    }
+  ],
+  "origen": "backfill-api-ogtic"
+}

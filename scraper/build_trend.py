@@ -11,7 +11,9 @@ def load_history():
         try:
             with open(path, "r", encoding="utf-8") as f:
                 doc = json.load(f)
-            date = doc.get("week", {}).get("end_date") or os.path.splitext(os.path.basename(path))[0]
+            # Día de publicación (nombre del archivo). Antes se usaba week.end_date
+            # cuando venía, y esas semanas salían 7 días tarde en la gráfica.
+            date = os.path.splitext(os.path.basename(path))[0]
             items = doc.get("items", [])
             entries.append((date, items))
         except Exception as e:

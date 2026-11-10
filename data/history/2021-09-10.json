@@ -1,0 +1,60 @@
+{
+  "source": "https://api.digital.gob.do/v1/fuels?date=2021-09-11",
+  "updated_at_utc": null,
+  "week": {
+    "start_date": null,
+    "end_date": null,
+    "label": null
+  },
+  "vigencia": {
+    "desde": "2021-09-11",
+    "hasta": "2021-09-17"
+  },
+  "week_label": null,
+  "currency": "DOP",
+  "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 261.8,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasolina Regular",
+      "key": "gasolina_regular",
+      "price_dop": 243.3,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Regular",
+      "key": "gasoil_regular",
+      "price_dop": 188.9,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 212.2,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Kerosene",
+      "key": "kerosene",
+      "price_dop": 185.7,
+      "unit": "galon",
+      "change": null
+    },
+    {
+      "label": "Gas Licuado de Petróleo (GLP)",
+      "key": "glp",
+      "price_dop": 127.1,
+      "unit": "galon",
+      "change": null
+    }
+  ],
+  "origen": "backfill-api-ogtic"
+}

@@ -1,0 +1,126 @@
+{
+  "source": "https://micm.gob.do/wp-content/uploads/2024/08/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-31-AGOST-06-DE-SEPT-DE-2024-.pdf",
+  "updated_at_utc": null,
+  "week": {
+    "start_date": null,
+    "end_date": null,
+    "label": null
+  },
+  "vigencia": {
+    "desde": "2024-08-31",
+    "hasta": "2024-09-06"
+  },
+  "week_label": null,
+  "currency": "DOP",
+  "items": [
+    {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 290.1,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Gasolina Regular",
+      "key": "gasolina_regular",
+      "price_dop": 272.5,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Gasoil Regular",
+      "key": "gasoil_regular",
+      "price_dop": 221.6,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 239.1,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Avtur",
+      "key": "avtur",
+      "price_dop": 187.94,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Kerosene",
+      "key": "kerosene",
+      "price_dop": 216.7,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Fueloil #6",
+      "key": "fueloil_6",
+      "price_dop": 156.81,
+      "unit": "galon",
+      "change": {
+        "type": "down",
+        "amount_dop": -0.33
+      }
+    },
+    {
+      "label": "Gas Licuado de Petróleo (GLP)",
+      "key": "glp",
+      "price_dop": 132.6,
+      "unit": "galon",
+      "change": {
+        "type": "same",
+        "amount_dop": 0.0
+      }
+    },
+    {
+      "label": "Cilindro 100 lb",
+      "key": "cilindro_100_lb",
+      "price_dop": 3314.99,
+      "unit": "cilindro",
+      "change": null
+    },
+    {
+      "label": "Cilindro 50 lb",
+      "key": "cilindro_50_lb",
+      "price_dop": 1657.5,
+      "unit": "cilindro",
+      "change": null
+    },
+    {
+      "label": "Cilindro 25 lb",
+      "key": "cilindro_25_lb",
+      "price_dop": 828.75,
+      "unit": "cilindro",
+      "change": null
+    },
+    {
+      "label": "Cilindro 15 lb",
+      "key": "cilindro_15_lb",
+      "price_dop": 497.25,
+      "unit": "cilindro",
+      "change": null
+    }
+  ],
+  "origen": "backfill-circular"
+}
