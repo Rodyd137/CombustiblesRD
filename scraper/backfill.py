@@ -34,8 +34,36 @@ def enlaces(pagina):
         return []
 
 
+HISTORICO = "https://micm.gob.do/direcciones/combustibles/estadisticas-institucionales/historico-aviso-oficial-precios-de-combustibles/"
+
+
+def bajar_historico():
+    """Guarda los documentos de la página «Histórico aviso oficial» (xls/xlsx/csv/pdf)."""
+    destino = os.path.join(OUT, "historico")
+    os.makedirs(destino, exist_ok=True)
+    try:
+        r = requests.get(HISTORICO, timeout=40)
+        print(f"{r.status_code} {HISTORICO}")
+        sopa = BeautifulSoup(r.text, "lxml")
+        docs = sorted({urljoin(HISTORICO, a["href"]) for a in sopa.select("a[href]")
+                       if re.search(r"\.(xlsx?|csv|pdf|zip)$", a["href"], re.I)})
+        with open(os.path.join(destino, "enlaces.txt"), "w") as f:
+            f.write("\n".join(docs))
+        for u in docs:
+            if re.search(r"\.(xlsx?|csv|zip)$", u, re.I):
+                d = requests.get(u, timeout=120)
+                with open(os.path.join(destino, u.rsplit("/", 1)[-1]), "wb") as f:
+                    f.write(d.content)
+        print(f"histórico: {len(docs)} documentos")
+    except Exception as e:
+        print(f"⚠️  histórico: {e}")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
+    bajar_historico()
+    if os.environ.get("BACKFILL_SOLO_HISTORICO"):
+        return
     urls = []
     for p in PAGINAS:
         for u in enlaces(p):

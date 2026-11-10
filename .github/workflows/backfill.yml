@@ -22,6 +22,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
       - name: Backfill
+        env:
+          BACKFILL_SOLO_HISTORICO: "1"
         run: cd scraper && python backfill.py
       - name: Commit informe
         run: |
