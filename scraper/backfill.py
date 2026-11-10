@@ -21,6 +21,11 @@ def enlaces(pagina):
         print(f"{r.status_code} {pagina}")
         if r.status_code != 200:
             return []
+        if os.environ.get("BACKFILL_GUARDAR_HTML"):
+            nombre = re.sub(r"[^a-z0-9]+", "-", pagina.lower())[-60:] + ".html"
+            os.makedirs(os.path.join(OUT, "paginas"), exist_ok=True)
+            with open(os.path.join(OUT, "paginas", nombre), "w", encoding="utf-8") as f:
+                f.write(r.text)
         sopa = BeautifulSoup(r.text, "lxml")
         return [urljoin(pagina, a["href"]) for a in sopa.select("a[href$='.pdf'], a[href$='.PDF']")]
     except Exception as e:
