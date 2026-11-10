@@ -34,7 +34,7 @@ def enlaces(pagina):
         return []
 
 
-HISTORICO = "https://micm.gob.do/direcciones/combustibles/estadisticas-institucionales/historico-aviso-oficial-precios-de-combustibles/"
+HISTORICO = "https://micm.gob.do/transparencia/estadisticas-institucionales/estadisticas-combustibles"
 
 
 def bajar_historico():
@@ -48,7 +48,7 @@ def bajar_historico():
             f.write(r.text)
         sopa = BeautifulSoup(r.text, "lxml")
         docs = sorted({urljoin(HISTORICO, a["href"]) for a in sopa.select("a[href]")
-                       if re.search(r"\.(xlsx?|csv|pdf|zip)$", a["href"], re.I)})
+                       if re.search(r"\.(xlsx?|csv|pdf|zip)($|\?)", a["href"], re.I) or "download" in a["href"].lower()})
         with open(os.path.join(destino, "enlaces.txt"), "w") as f:
             f.write("\n".join(docs))
         for u in docs:
