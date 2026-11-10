@@ -32,21 +32,31 @@
     {
       "label": "Gasoil Regular",
       "key": "gasoil_regular",
-      "price_dop": 369.34,
+      "price_dop": 267.8,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 28.71
+        "amount_dop": 5.0
+      }
+    },
+    {
+      "label": "Gasoil Óptimo",
+      "key": "gasoil_optimo",
+      "price_dop": 302.1,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 9.0
       }
     },
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 350.1,
+      "price_dop": 345.4,
       "unit": "galon",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "up",
+        "amount_dop": 27.43
       }
     },
     {
@@ -62,11 +72,11 @@
     {
       "label": "Fueloil #6",
       "key": "fueloil_6",
-      "price_dop": 169.15,
+      "price_dop": 178.38,
       "unit": "galon",
       "change": {
         "type": "up",
-        "amount_dop": 5.54
+        "amount_dop": 5.53
       }
     },
     {
@@ -84,40 +94,28 @@
       "key": "cilindro_100_lb",
       "price_dop": 3380.07,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 50 lb",
       "key": "cilindro_50_lb",
       "price_dop": 1690.04,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 25 lb",
       "key": "cilindro_25_lb",
       "price_dop": 845.02,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 15 lb",
       "key": "cilindro_15_lb",
       "price_dop": 507.01,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     }
   ]
 }

@@ -94,40 +94,28 @@
       "key": "cilindro_100_lb",
       "price_dop": 3429.95,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 50 lb",
       "key": "cilindro_50_lb",
       "price_dop": 1714.98,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 25 lb",
       "key": "cilindro_25_lb",
       "price_dop": 857.49,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 15 lb",
       "key": "cilindro_15_lb",
       "price_dop": 514.49,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     }
   ]
 }

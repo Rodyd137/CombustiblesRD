@@ -22,7 +22,7 @@ def load_history():
 def main():
     trend = {}
     for key, date, price in load_history():
-        trend.setdefault(key, []).append({"date": date, "price_dop": int(round(price))})
+        trend.setdefault(key, []).append({"date": date, "price_dop": round(float(price), 2)})
     # ordena por fecha
     for key in trend:
         trend[key].sort(key=lambda x: x["date"])

@@ -6,3 +6,4 @@ pymupdf==1.24.9     # render PDF -> imagen (fitz)
 pytesseract         # OCR
 Pillow              # imágenes
 python-dateutil
+pypdf               # capa de texto del aviso (antes que el OCR)

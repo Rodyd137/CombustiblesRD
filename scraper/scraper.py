@@ -6,6 +6,7 @@ import fitz  # PyMuPDF
 import pytesseract
 from pytesseract import Output
 from PIL import Image
+from texto_pdf import texto_de_pdf, items_desde_texto
 
 # URLs del MICM
 MICM_2025_URL = "https://micm.gob.do/direcciones/combustibles/avisos-semanales-de-precios/avisos-semanales-de-precios-de-combustibles/avisos-semanales-de-precios-de-combustibles-2025/"
@@ -809,13 +810,23 @@ def main():
     ensure_dirs()
     pdf_url, pdf_bytes = get_latest_pdf()
 
-    # OCR posicional de las 1–2 primeras páginas
-    lines = ocr_pdf_to_lines(pdf_bytes, pages=(0,1), dpi=330, lang="spa+eng")
+    # 1) Capa de texto del PDF: cifras exactas, sin OCR (10-nov-2026). El OCR
+    #    confundía filas: cogía «Gasoil Regular EGP-C» (generadoras) por el
+    #    gasoil regular, la premium por el avtur, la variación por el precio…
+    texto = texto_de_pdf(pdf_bytes)
+    items = items_desde_texto(texto)
+    if items is not None:
+        print(f"✅ precios leídos del texto del PDF ({len(items)} items)")
+        lines = [{"text": l, "text_l": l.lower()} for l in texto.splitlines()]
+    else:
+        # 2) Respaldo: OCR posicional de las 1–2 primeras páginas
+        print("ℹ️  el PDF no trae texto legible; uso OCR")
+        lines = ocr_pdf_to_lines(pdf_bytes, pages=(0,1), dpi=330, lang="spa+eng")
 
-    items = build_items_from_lines(lines)
-    if not items:
-        # safety-net: intenta sobre TODAS las líneas
-        items = build_items_from_lines(lines=lines)
+        items = build_items_from_lines(lines)
+        if not items:
+            # safety-net: intenta sobre TODAS las líneas
+            items = build_items_from_lines(lines=lines)
 
     # ---- M4: gate publish on a sanity-check item count ----
     if len(items) < MIN_ITEMS_THRESHOLD:

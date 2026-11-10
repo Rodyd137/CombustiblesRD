@@ -10,6 +10,16 @@
   "currency": "DOP",
   "items": [
     {
+      "label": "Gasolina Premium",
+      "key": "gasolina_premium",
+      "price_dop": 341.1,
+      "unit": "galon",
+      "change": {
+        "type": "up",
+        "amount_dop": 3.0
+      }
+    },
+    {
       "label": "Gasolina Regular",
       "key": "gasolina_regular",
       "price_dop": 304.5,
@@ -84,40 +94,28 @@
       "key": "cilindro_100_lb",
       "price_dop": 3380.07,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 50 lb",
       "key": "cilindro_50_lb",
       "price_dop": 1690.04,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 25 lb",
       "key": "cilindro_25_lb",
       "price_dop": 845.02,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     },
     {
       "label": "Cilindro 15 lb",
       "key": "cilindro_15_lb",
       "price_dop": 507.01,
       "unit": "cilindro",
-      "change": {
-        "type": "same",
-        "amount_dop": 0.0
-      }
+      "change": null
     }
   ]
 }
