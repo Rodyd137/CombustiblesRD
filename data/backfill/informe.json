@@ -1,0 +1,1222 @@
+[
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/11/AVISO-PRE.-SEM.CORTE-07-13-NOV-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 362.1,
+    "variacion": 4.0
+   },
+   "gasolina_regular": {
+    "price_dop": 317.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 270.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 322.1,
+    "variacion": 4.0
+   },
+   "avtur": {
+    "price_dop": 340.48,
+    "variacion": -16.34
+   },
+   "kerosene": {
+    "price_dop": 383.0,
+    "variacion": -17.1
+   },
+   "fueloil_6": {
+    "price_dop": 182.39,
+    "variacion": -12.17
+   },
+   "fueloil_1s": {
+    "price_dop": 222.41,
+    "variacion": -12.45
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-31-OCT-06-NOV-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 358.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 317.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 270.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 318.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 356.82,
+    "variacion": -1.84
+   },
+   "kerosene": {
+    "price_dop": 400.1,
+    "variacion": -2.6
+   },
+   "fueloil_6": {
+    "price_dop": 194.56,
+    "variacion": -1.31
+   },
+   "fueloil_1s": {
+    "price_dop": 234.86,
+    "variacion": 2.22
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": "2026-10-31",
+  "hasta": "2026-11-06",
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-24-30-OCT-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 358.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 317.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 270.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 318.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 358.66,
+    "variacion": 6.18
+   },
+   "kerosene": {
+    "price_dop": 402.7,
+    "variacion": 6.9
+   },
+   "fueloil_6": {
+    "price_dop": 195.87,
+    "variacion": 3.79
+   },
+   "fueloil_1s": {
+    "price_dop": 232.64,
+    "variacion": 3.74
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-17-23-OCT-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 358.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 317.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 270.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 318.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 352.48,
+    "variacion": 7.89
+   },
+   "kerosene": {
+    "price_dop": 395.8,
+    "variacion": 8.6
+   },
+   "fueloil_6": {
+    "price_dop": 192.08,
+    "variacion": 9.06
+   },
+   "fueloil_1s": {
+    "price_dop": 228.9,
+    "variacion": 9.23
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/12/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-28-DIC-03-DE-ENE-DE-2025-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 195.91,
+    "variacion": -0.08
+   },
+   "kerosene": {
+    "price_dop": 226.2,
+    "variacion": -0.1
+   },
+   "fueloil_6": {
+    "price_dop": 159.49,
+    "variacion": -0.43
+   },
+   "fueloil_1s": {
+    "price_dop": 172.09,
+    "variacion": -1.25
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/12/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-21-27-DE-DIC-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 195.99,
+    "variacion": 5.84
+   },
+   "kerosene": {
+    "price_dop": 226.3,
+    "variacion": 6.6
+   },
+   "fueloil_6": {
+    "price_dop": 159.92,
+    "variacion": 3.34
+   },
+   "fueloil_1s": {
+    "price_dop": 173.34,
+    "variacion": 1.97
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3315.03,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.52,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.76,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/12/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-14-20-DE-DIC-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 190.15,
+    "variacion": 0.38
+   },
+   "kerosene": {
+    "price_dop": 219.7,
+    "variacion": 0.1
+   },
+   "fueloil_6": {
+    "price_dop": 156.58,
+    "variacion": 0.34
+   },
+   "fueloil_1s": {
+    "price_dop": 171.37,
+    "variacion": 2.31
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/12/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-07-13-DE-DIC-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 189.77,
+    "variacion": -1.87
+   },
+   "kerosene": {
+    "price_dop": 219.6,
+    "variacion": -1.9
+   },
+   "fueloil_6": {
+    "price_dop": 156.24,
+    "variacion": 0.0
+   },
+   "fueloil_1s": {
+    "price_dop": 169.06,
+    "variacion": 0.8
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/11/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-30-06-DE-DIC-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 191.64,
+    "variacion": 3.05
+   },
+   "kerosene": {
+    "price_dop": 221.5,
+    "variacion": 3.0
+   },
+   "fueloil_6": {
+    "price_dop": 156.24,
+    "variacion": 2.99
+   },
+   "fueloil_1s": {
+    "price_dop": 168.26,
+    "variacion": 0.58
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/11/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-23-29-DE-NOV-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 188.59,
+    "variacion": -0.02
+   },
+   "kerosene": {
+    "price_dop": 218.5,
+    "variacion": 0.3
+   },
+   "fueloil_6": {
+    "price_dop": 153.25,
+    "variacion": -2.36
+   },
+   "fueloil_1s": {
+    "price_dop": 167.68,
+    "variacion": -1.76
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/11/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-16-22-DE-NOV-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 188.61,
+    "variacion": -2.89
+   },
+   "kerosene": {
+    "price_dop": 218.2,
+    "variacion": -2.9
+   },
+   "fueloil_6": {
+    "price_dop": 155.61,
+    "variacion": -0.75
+   },
+   "fueloil_1s": {
+    "price_dop": 169.44,
+    "variacion": -2.31
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/11/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-09-15-DE-NOV-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 191.5,
+    "variacion": 5.83
+   },
+   "kerosene": {
+    "price_dop": 221.1,
+    "variacion": 6.6
+   },
+   "fueloil_6": {
+    "price_dop": 156.36,
+    "variacion": -2.31
+   },
+   "fueloil_1s": {
+    "price_dop": 171.75,
+    "variacion": 3.71
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/11/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-02-08-DE-NOV-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 185.67,
+    "variacion": 0.56
+   },
+   "kerosene": {
+    "price_dop": 214.5,
+    "variacion": 0.7
+   },
+   "fueloil_6": {
+    "price_dop": 158.67,
+    "variacion": -4.8
+   },
+   "fueloil_1s": {
+    "price_dop": 168.04,
+    "variacion": -5.8
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2024/10/AVISO-PRECIOS-COMBUSTIBLES-SEM.CORTE-26-OCT-01-DE-NOV-DE-2024-.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 290.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 272.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 221.6,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 239.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 185.11,
+    "variacion": -4.92
+   },
+   "kerosene": {
+    "price_dop": 213.8,
+    "variacion": -5.3
+   },
+   "fueloil_6": {
+    "price_dop": 163.47,
+    "variacion": -2.54
+   },
+   "fueloil_1s": {
+    "price_dop": 173.84,
+    "variacion": -4.71
+   },
+   "glp": {
+    "price_dop": 132.6,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3314.99,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1657.5,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 828.75,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 497.25,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-10-16-OCT-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 358.1,
+    "variacion": 5.0
+   },
+   "gasolina_regular": {
+    "price_dop": 317.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 270.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 318.1,
+    "variacion": 12.0
+   },
+   "avtur": {
+    "price_dop": 344.59,
+    "variacion": 10.94
+   },
+   "kerosene": {
+    "price_dop": 387.2,
+    "variacion": 7.1
+   },
+   "fueloil_6": {
+    "price_dop": 183.02,
+    "variacion": 2.26
+   },
+   "fueloil_1s": {
+    "price_dop": 219.67,
+    "variacion": 6.92
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/10/AVISO-PRE.-SEM.CORTE-03-09-OCT-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 353.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 317.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 270.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 306.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 333.65,
+    "variacion": -3.34
+   },
+   "kerosene": {
+    "price_dop": 380.1,
+    "variacion": -3.6
+   },
+   "fueloil_6": {
+    "price_dop": 180.76,
+    "variacion": 4.04
+   },
+   "fueloil_1s": {
+    "price_dop": 212.75,
+    "variacion": 2.36
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/09/AVISO-PRE.-SEM.CORTE-26-SEP-02-OCT-DE-2026-ESC.-2-ESC.-3.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 353.1,
+    "variacion": 3.0
+   },
+   "gasolina_regular": {
+    "price_dop": 317.5,
+    "variacion": 2.0
+   },
+   "gasoil_regular": {
+    "price_dop": 270.8,
+    "variacion": 3.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 306.1,
+    "variacion": 4.0
+   },
+   "avtur": {
+    "price_dop": 336.99,
+    "variacion": -8.41
+   },
+   "kerosene": {
+    "price_dop": 383.7,
+    "variacion": -4.6
+   },
+   "fueloil_6": {
+    "price_dop": 176.72,
+    "variacion": -1.66
+   },
+   "fueloil_1s": {
+    "price_dop": 210.39,
+    "variacion": -4.08
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": "2026-09-26",
+  "hasta": "2026-10-02",
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/09/AVISO-PRE.-SEM.CORTE-19-25-SEP-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 350.1,
+    "variacion": 9.0
+   },
+   "gasolina_regular": {
+    "price_dop": 315.5,
+    "variacion": 5.0
+   },
+   "gasoil_regular": {
+    "price_dop": 267.8,
+    "variacion": 5.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 302.1,
+    "variacion": 9.0
+   },
+   "avtur": {
+    "price_dop": 345.4,
+    "variacion": 27.43
+   },
+   "kerosene": {
+    "price_dop": 388.3,
+    "variacion": 29.3
+   },
+   "fueloil_6": {
+    "price_dop": 178.38,
+    "variacion": 5.53
+   },
+   "fueloil_1s": {
+    "price_dop": 214.47,
+    "variacion": 11.08
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/09/AVISO-PRE.-SEM.CORTE-12-18-SEP-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 341.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 310.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 262.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 293.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 317.97,
+    "variacion": 14.47
+   },
+   "kerosene": {
+    "price_dop": 359.0,
+    "variacion": 15.8
+   },
+   "fueloil_6": {
+    "price_dop": 172.85,
+    "variacion": 5.12
+   },
+   "fueloil_1s": {
+    "price_dop": 203.39,
+    "variacion": 5.98
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ },
+ {
+  "url": "https://micm.gob.do/wp-content/uploads/2026/09/AVISO-PRE.-SEM.CORTE-05-11-SEP-DE-2026.pdf",
+  "con_texto": true,
+  "precios": {
+   "gasolina_premium": {
+    "price_dop": 341.1,
+    "variacion": 0.0
+   },
+   "gasolina_regular": {
+    "price_dop": 310.5,
+    "variacion": 0.0
+   },
+   "gasoil_regular": {
+    "price_dop": 262.8,
+    "variacion": 0.0
+   },
+   "gasoil_optimo": {
+    "price_dop": 293.1,
+    "variacion": 0.0
+   },
+   "avtur": {
+    "price_dop": 303.5,
+    "variacion": 12.28
+   },
+   "kerosene": {
+    "price_dop": 343.2,
+    "variacion": 13.5
+   },
+   "fueloil_6": {
+    "price_dop": 167.73,
+    "variacion": 1.47
+   },
+   "fueloil_1s": {
+    "price_dop": 197.41,
+    "variacion": 1.43
+   },
+   "glp": {
+    "price_dop": 135.2,
+    "variacion": 0.0
+   },
+   "cilindro_100_lb": {
+    "price_dop": 3380.07,
+    "variacion": null
+   },
+   "cilindro_50_lb": {
+    "price_dop": 1690.04,
+    "variacion": null
+   },
+   "cilindro_25_lb": {
+    "price_dop": 845.02,
+    "variacion": null
+   },
+   "cilindro_15_lb": {
+    "price_dop": 507.01,
+    "variacion": null
+   }
+  },
+  "desde": null,
+  "hasta": null,
+  "dada": null
+ }
+]
