@@ -53,6 +53,10 @@ jobs:
       - name: Build trend (min)
         run: python scraper/build_trend_min.py
 
+      # Toda la serie desde 2010 para el rango «Todo» de la app.
+      - name: Build trend (todo)
+        run: python scraper/build_trend_todo.py
+
       - name: Show latest.json preview
         run: |
           echo "---- latest.json (head) ----"
