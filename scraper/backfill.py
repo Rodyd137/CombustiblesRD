@@ -11,7 +11,8 @@ import scraper
 
 BASE = ("https://micm.gob.do/direcciones/combustibles/avisos-semanales-de-precios/"
         "avisos-semanales-de-precios-de-combustibles/")
-PAGINAS = [BASE] + [f"{BASE}avisos-semanales-de-precios-de-combustibles-{y}/" for y in range(2021, 2027)]
+# El índice general va de 10 en 10 (…/2/, …/3/…): 30 páginas llegan a 2020.
+PAGINAS = [BASE] + [f"{BASE}{n}/" for n in range(2, 31)]
 OUT = os.path.join(scraper.OUT_DIR, "backfill")
 
 

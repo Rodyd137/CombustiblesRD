@@ -22,8 +22,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
       - name: Backfill
-        env:
-          BACKFILL_GUARDAR_HTML: "1"
         run: cd scraper && python backfill.py
       - name: Commit informe
         run: |
