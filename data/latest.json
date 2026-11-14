@@ -1,6 +1,6 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2026/11/AVISO-PRE.-SEM.CORTE-07-13-NOV-DE-2026.pdf",
-  "updated_at_utc": "2026-11-06T23:36:41Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2026/11/AVISO-PRE.-SEM.CORTE-14-20-NOV-DE-2026.pdf",
+  "updated_at_utc": "2026-11-14T00:19:01Z",
   "week": {
     "start_date": null,
     "end_date": null,
@@ -15,8 +15,8 @@
       "price_dop": 362.1,
       "unit": "galon",
       "change": {
-        "type": "up",
-        "amount_dop": 4.0
+        "type": "same",
+        "amount_dop": 0.0
       }
     },
     {
@@ -45,38 +45,38 @@
       "price_dop": 322.1,
       "unit": "galon",
       "change": {
-        "type": "up",
-        "amount_dop": 4.0
+        "type": "same",
+        "amount_dop": 0.0
       }
     },
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 340.48,
+      "price_dop": 333.54,
       "unit": "galon",
       "change": {
         "type": "down",
-        "amount_dop": -16.34
+        "amount_dop": -6.94
       }
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 383.0,
+      "price_dop": 375.6,
       "unit": "galon",
       "change": {
         "type": "down",
-        "amount_dop": -17.1
+        "amount_dop": -7.4
       }
     },
     {
       "label": "Fueloil #6",
       "key": "fueloil_6",
-      "price_dop": 182.39,
+      "price_dop": 170.33,
       "unit": "galon",
       "change": {
         "type": "down",
-        "amount_dop": -12.17
+        "amount_dop": -12.06
       }
     },
     {
