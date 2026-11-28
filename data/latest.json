@@ -1,12 +1,12 @@
 {
-  "source": "https://micm.gob.do/wp-content/uploads/2026/11/AVISO-PRE.-SEM.CORTE-21-27-NOV-DE-2026.pdf",
-  "updated_at_utc": "2026-11-21T00:56:57Z",
+  "source": "https://micm.gob.do/wp-content/uploads/2026/11/AVISO-PRE.-SEM.CORTE-28-NOV-04-DIC-DE-2026.pdf",
+  "updated_at_utc": "2026-11-28T02:57:19Z",
   "week": {
-    "start_date": null,
-    "end_date": null,
-    "label": null
+    "start_date": "2026-11-28",
+    "end_date": "2026-12-04",
+    "label": "Vigente: 28 nov – 4 dic 2026"
   },
-  "week_label": null,
+  "week_label": "Vigente: 28 nov – 4 dic 2026",
   "currency": "DOP",
   "items": [
     {
@@ -52,31 +52,31 @@
     {
       "label": "Avtur",
       "key": "avtur",
-      "price_dop": 303.66,
+      "price_dop": 275.93,
       "unit": "galon",
       "change": {
         "type": "down",
-        "amount_dop": -29.88
+        "amount_dop": -27.73
       }
     },
     {
       "label": "Kerosene",
       "key": "kerosene",
-      "price_dop": 342.5,
+      "price_dop": 312.9,
       "unit": "galon",
       "change": {
         "type": "down",
-        "amount_dop": -33.1
+        "amount_dop": -29.6
       }
     },
     {
       "label": "Fueloil #6",
       "key": "fueloil_6",
-      "price_dop": 166.87,
+      "price_dop": 162.72,
       "unit": "galon",
       "change": {
         "type": "down",
-        "amount_dop": -3.46
+        "amount_dop": -4.15
       }
     },
     {
@@ -92,21 +92,21 @@
     {
       "label": "Cilindro 100 lb",
       "key": "cilindro_100_lb",
-      "price_dop": 3380.07,
+      "price_dop": 3380.09,
       "unit": "cilindro",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "up",
+        "amount_dop": 0.02
       }
     },
     {
       "label": "Cilindro 50 lb",
       "key": "cilindro_50_lb",
-      "price_dop": 1690.04,
+      "price_dop": 1690.05,
       "unit": "cilindro",
       "change": {
-        "type": "same",
-        "amount_dop": 0.0
+        "type": "up",
+        "amount_dop": 0.01
       }
     },
     {
