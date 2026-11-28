@@ -1,6 +1,6 @@
 {
   "source": "https://micm.gob.do/wp-content/uploads/2026/11/AVISO-PRE.-SEM.CORTE-28-NOV-04-DIC-DE-2026.pdf",
-  "updated_at_utc": "2026-11-28T02:57:19Z",
+  "updated_at_utc": "2026-11-28T06:01:58Z",
   "week": {
     "start_date": "2026-11-28",
     "end_date": "2026-12-04",
@@ -95,8 +95,8 @@
       "price_dop": 3380.09,
       "unit": "cilindro",
       "change": {
-        "type": "up",
-        "amount_dop": 0.02
+        "type": "same",
+        "amount_dop": 0.0
       }
     },
     {
@@ -105,8 +105,8 @@
       "price_dop": 1690.05,
       "unit": "cilindro",
       "change": {
-        "type": "up",
-        "amount_dop": 0.01
+        "type": "same",
+        "amount_dop": 0.0
       }
     },
     {
